@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC.png?versionId=CAEQDhiBgIDlw6TgxhciIDZkODI4ZmVkNzJhYjQxMjBiN2JkYjIzODM3OTc0OWE0">
 <meta property="article:published_time" content="2021-04-15T11:24:40.922Z">
-<meta property="article:modified_time" content="2021-04-16T00:50:33.335Z">
+<meta property="article:modified_time" content="2021-04-16T01:20:10.316Z">
 <meta property="article:author" content="wha1e">
 <meta property="article:tag" content="write up">
 <meta name="twitter:card" content="summary">
@@ -233,7 +233,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-16 08:50:33" itemprop="dateModified" datetime="2021-04-16T08:50:33+08:00">2021-04-16</time>
+                <time title="修改时间：2021-04-16 09:20:10" itemprop="dateModified" datetime="2021-04-16T09:20:10+08:00">2021-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,7 +259,7 @@
         <p>ctfhub web题wp</p>
 <span id="more"></span>
 
-<h4 id="文件上传–无验证"><a href="#文件上传–无验证" class="headerlink" title="文件上传–无验证"></a>文件上传–无验证</h4><p>编写一句话木马并上传<br><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC.png?versionId=CAEQDhiBgIDlw6TgxhciIDZkODI4ZmVkNzJhYjQxMjBiN2JkYjIzODM3OTc0OWE0"></p>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><h4 id="无验证"><a href="#无验证" class="headerlink" title="无验证"></a>无验证</h4><p>编写一句话木马并上传<br><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC.png?versionId=CAEQDhiBgIDlw6TgxhciIDZkODI4ZmVkNzJhYjQxMjBiN2JkYjIzODM3OTc0OWE0"></p>
 <p>获取相对路径</p>
 <p>upload/shell.php</p>
 <p>打开中国蚁剑上传</p>
@@ -282,10 +282,20 @@
 
 
 <p>为将指定名字的文件解析为”php”文件</p>
-<p>上传</p>
-<p>接着上传一句话木马（后缀名修改为”jpg”）</p>
+<p>如此代码为将”1.jpg”就会被当成”php”执行。</p>
+<h5 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h5><p>上传”.htaccess”文件，提交</p>
+<p>目的是替换原有的”.htaccess”文件</p>
+<p>上传”一句话木马.jpg”，提交</p>
 <p>中国蚁剑一把梭。</p>
-<h4 id><a href="#" class="headerlink" title></a></h4>
+<h5 id><a href="#" class="headerlink" title></a></h5><h4 id="MEMI绕过"><a href="#MEMI绕过" class="headerlink" title="MEMI绕过"></a>MEMI绕过</h4><h5 id="什么是MEMI"><a href="#什么是MEMI" class="headerlink" title="什么是MEMI"></a>什么是MEMI</h5><p>MIME(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。</p>
+<h5 id="MEMI绕过的原理"><a href="#MEMI绕过的原理" class="headerlink" title="MEMI绕过的原理"></a>MEMI绕过的原理</h5><p>部分Web应用系统判定文件类型是通过content-type字段，黑客可以通过抓包，将content-type字段改为常见的图片类型，如image/gif，从而绕过校验。</p>
+<h5 id="常见的MIME类型"><a href="#常见的MIME类型" class="headerlink" title="常见的MIME类型"></a>常见的MIME类型</h5><p>text/plain（纯文本）<br>text/html（HTML文档）<br>text/javascript（js代码）<br>application/xhtml+xml（XHTML文档）<br>image/gif（GIF图像）<br>image/jpeg（JPEG图像）<br>image/png（PNG图像）<br>video/mpeg（MPEG动画）<br>application/octet-stream（二进制数据）<br>application/pdf（PDF文档）</p>
+<h5 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h5><p>上传”一句话木马.php”,Burp Suit抓包</p>
+<p>raw栏，修改Conte-Type: application/octet-stream为</p>
+<p>Conte-Type: image/png</p>
+<p>放包</p>
+<p>中国蚁剑一把梭。</p>
+
     </div>
 
     
@@ -365,7 +375,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%93%E6%97%A0%E9%AA%8C%E8%AF%81"><span class="nav-number">1.</span> <span class="nav-text">文件上传–无验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81"><span class="nav-number">2.</span> <span class="nav-text">前端验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#htaccess"><span class="nav-number">3.</span> <span class="nav-text">.htaccess</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#htaccess%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">.htaccess是什么？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#htaccess-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">.htaccess 文件上传漏洞原理：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text"></span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">1.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E9%AA%8C%E8%AF%81"><span class="nav-number">1.1.</span> <span class="nav-text">无验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81"><span class="nav-number">1.2.</span> <span class="nav-text">前端验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#htaccess"><span class="nav-number">1.3.</span> <span class="nav-text">.htaccess</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#htaccess%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.3.1.</span> <span class="nav-text">.htaccess是什么？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#htaccess-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">1.3.2.</span> <span class="nav-text">.htaccess 文件上传漏洞原理：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98"><span class="nav-number">1.3.3.</span> <span class="nav-text">解题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.3.4.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MEMI%E7%BB%95%E8%BF%87"><span class="nav-number">1.4.</span> <span class="nav-text">MEMI绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFMEMI"><span class="nav-number">1.4.1.</span> <span class="nav-text">什么是MEMI</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MEMI%E7%BB%95%E8%BF%87%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">1.4.2.</span> <span class="nav-text">MEMI绕过的原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84MIME%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.3.</span> <span class="nav-text">常见的MIME类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98-1"><span class="nav-number">1.4.4.</span> <span class="nav-text">解题</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
