@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
+    <title>蓝帽杯</title>
     <url>/2021/04/22/%E8%93%9D%E5%B8%BD%E6%9D%AF/</url>
-    <content><![CDATA[<h5 id="title-蓝帽杯"><a href="#title-蓝帽杯" class="headerlink" title="title: 蓝帽杯"></a>title: 蓝帽杯</h5><p>top:<br>tags: Thinking<br>categories: dailylife</p>
-<p>ctf 不是全部，只是学习安全的一种的方式！</p>
+    <content><![CDATA[<p>ctf 不是全部，只是学习安全的一种的方式！</p>
 <span id="more"></span>
 
 <h5 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h5><p>在此之前把蓝帽杯看的太重了，以至于没有分配到厉害的师兄难过了一段时间，但最终还是以戏剧收场。等待结果ing</p>
@@ -38,6 +37,12 @@
 <p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A13.png?versionId=CAEQFRiBgMDGlurTyxciIDY3MjUyM2ViZTVhNTQxMDNiOGUzOTVjYzYyNTFmNDk2"></p>
 <h5 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h5><p>三解，排名82。期待审核能过，参加第一场线下赛。</p>
 ]]></content>
+      <categories>
+        <category>dailylife</category>
+      </categories>
+      <tags>
+        <tag>Thinking</tag>
+      </tags>
   </entry>
   <entry>
     <title>2021CISCN国赛</title>
