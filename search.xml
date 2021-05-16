@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>/2021/04/22/%E8%93%9D%E5%B8%BD%E6%9D%AF/</url>
+    <content><![CDATA[<h5 id="title-蓝帽杯"><a href="#title-蓝帽杯" class="headerlink" title="title: 蓝帽杯"></a>title: 蓝帽杯</h5><p>top:<br>tags: Thinking<br>categories: dailylife</p>
+<p>ctf 不是全部，只是学习安全的一种的方式！</p>
+<span id="more"></span>
+
+<h5 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h5><p>在此之前把蓝帽杯看的太重了，以至于没有分配到厉害的师兄难过了一段时间，但最终还是以戏剧收场。等待结果ing</p>
+<h5 id="web滑雪大冒险"><a href="#web滑雪大冒险" class="headerlink" title="web滑雪大冒险"></a>web滑雪大冒险</h5><p>一句话，就是玩</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E6%BB%91%E9%9B%AA%E5%A4%A7%E5%86%92%E9%99%A9.png?versionId=CAEQFRiBgMCKoerTyxciIDU3YjA0OWQ0N2U3NTQxOWRiNjNlYjBmMGI3NzE1N2U5"></p>
+<h4 id="misc冬奥会-is-coming"><a href="#misc冬奥会-is-coming" class="headerlink" title="misc冬奥会_is_coming"></a>misc冬奥会_is_coming</h4><p>打开图片，从文件大小猜测有隐藏文件，打开Kali使用binwalk 分离，获得rar文件，解压获得encode.mp3</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A1.png?versionId=CAEQFRiBgMC3k.rTyxciIDA0MzRhYTU5Y2RiMDQ0ODFiOTkyYmY5OGY1NTA4ZDg3"></p>
+<p>先用winhex查看发现文件尾部有cipher</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A10.png?versionId=CAEQFRiBgMDxk.rTyxciIGVmZDE3MGZiZWQ2YTQ0Njc4OTI0ZmY2MzcxMmQ4MWVj"></p>
+<p>打开kali 使用cat命令获得密文</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A11.png?versionId=CAEQFRiBgMCElOrTyxciIDI3OWFhZDg4MGU5ZjQwZjBhZjA0ZTRiNTg2ODE4YmIy"></p>
+<p>为emoji加密，通过查找猜测为emoji-aes加密，但是找不出密钥，所以继续分析MP3文件</p>
+<p>MP3文件，联想encode编码猜测为mp3stego隐写，联想冬奥会举办时间，2022年2月4日，猜测密码为20220204，获取文件encode.mp3.txt</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A2.png?versionId=CAEQFRiBgMDzl.rTyxciIDQ4NmViZDMzMjM2NDQ5MjNiZDc5NDJiODEzZjNmOGE5"></p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A3.png?versionId=CAEQFRiBgMCKlurTyxciIGUzZmQ4NWIzZTVkNDRkYjc5ODQwNDJkZDA5Y2JiOWEx"></p>
+<p>先替换\x，将编码进行16进制解码，获得一串符号密文</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A7.png?versionId=CAEQFRiBgMD0murTyxciIGZlYmM5ODcwN2M5MzRmZjA5YTVkNWEyY2VhM2ViOGI5"></p>
+<p>查找知道这是wingding加密，通过在线工具解码</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A8.png?versionId=CAEQFRiBgMCrpurTyxciIDhmY2ZhZjgxNjI0NDQzNjJiNWMzNzg0NWYyZjIxNzE2"></p>
+<p>GitHub搜索1cePeak储存库</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A5.png?versionId=CAEQFRiBgMDUmOrTyxciIGVmNzViYThmZDFjYjQ2N2RhNGJmNjM4ZDY0YWViN2Ji"></p>
+<p>本以为直接下载即可获得key，没成想结果如下</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A4.png?versionId=CAEQFRiBgMCNmOrTyxciIDMxNzNjOTU1ZWExMTQ2OWM4MmRiZDg4MDgyZDFhNGNi"></p>
+<p>最后进入post-checkout界面下载获得key</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A6.png?versionId=CAEQFRiBgICimerTyxciIDY0MmMzZmQ2ODNjYjRmNDM4ODEwODE4YWNkYzM2NDlh"></p>
+<p>获得key</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A9.png?versionId=CAEQFRiBgIClnOrTyxciIDliZDJiNGFiODVkYTQ5MzdhZTAwZTQ5ZDgyZjdhNzZj">)</p>
+<p>How_6ad_c0uld_a_1cePeak_be?</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A12.png?versionId=CAEQFRiBgMCNlerTyxciIDczYjdiMmU1ZTgzNDQyODFhY2YxYWI5M2QyYzQ1YmQ5"></p>
+<p>综上，获取flag</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A13.png?versionId=CAEQFRiBgMDGlurTyxciIDY3MjUyM2ViZTVhNTQxMDNiOGUzOTVjYzYyNTFmNDk2"></p>
+<h5 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h5><p>三解，排名82。期待审核能过，参加第一场线下赛。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>2021CISCN国赛</title>
+    <url>/2021/05/16/2021CISCN%E5%9B%BD%E8%B5%9B/</url>
+    <content><![CDATA[<p>自去年部门加班补台账第二次熬夜到一点</p>
+<span id="more"></span>
+
+]]></content>
+      <categories>
+        <category>studylife</category>
+      </categories>
+      <tags>
+        <tag>write up</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>中华田园犬</title>
     <url>/2021/04/25/%E4%B8%AD%E5%8D%8E%E7%94%B0%E5%9B%AD%E7%8A%AC/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
