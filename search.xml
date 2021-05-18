@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ctfhub信息泄露</title>
+    <url>/2021/04/17/ctfhub%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2wp/</url>
+    <content><![CDATA[<p>ctfhub web之信息泄露</p>
+<span id="more"></span>
+
+<h4 id="目录遍历与PHPINFO"><a href="#目录遍历与PHPINFO" class="headerlink" title="目录遍历与PHPINFO"></a>目录遍历与PHPINFO</h4><p>0难度</p>
+<h5 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h5><p>依次打开文件夹即可，共16种可能，flag为随机出现</p>
+<p>属于签到题</p>
+<h5 id="PHPINFO"><a href="#PHPINFO" class="headerlink" title="PHPINFO"></a>PHPINFO</h5><p>页面内查找关键字”ctfhub”get flag </p>
+<h4 id="备份文件下载"><a href="#备份文件下载" class="headerlink" title="备份文件下载"></a>备份文件下载</h4><h5 id="网站源码"><a href="#网站源码" class="headerlink" title="网站源码"></a>网站源码</h5><p>当开发人员在线上环境中对源代码进行了备份操作，并且将备份文件放在了 web 目录下，就会引起网站源码泄露。</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%811.png?versionId=CAEQDhiBgIDF5vaLxxciIDBjZmZkNDQ5ZGUxOTRkMjBhYzAwNjFjNTdlMTViMGVi"></p>
+<p>dirsearch扫描</p>
+<p>命令如下（windows环境）：</p>
+<p>python dirsearch.py -u 网址 -e php 或 python .\dirsearch.py -u 网址 -e php</p>
+<p>扫描结果</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%813.png?versionId=CAEQDhiBgICCnPqnxxciIDI5MmE3OGY5M2JmMTRhODc5OTM3ZjFkMWYwODI1YTQz"></p>
+<p>网址+<a href="http://www.zip下载三个文件/">www.zip下载三个文件</a></p>
+<p>最终网站访问获得flag</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%81.png?versionId=CAEQDhiBgMCGnPqnxxciIDYwYjcxYjhiNTk3OTQzYjk4OWVhNzc0MDIxNzBlNTVj"></p>
+<h5 id="bak文件"><a href="#bak文件" class="headerlink" title="bak文件"></a>bak文件</h5><p>dirsearch扫描</p>
+<p>获取三个文件</p>
+<p><strong>/index.php</strong></p>
+<p><strong>/index.php.bak</strong></p>
+<p><strong>/index.php/llogin/</strong></p>
+<p>浏览器网址+/index.php.bak打开</p>
+<p>下载完成后打开获取flag</p>
+<h5 id="vim缓存"><a href="#vim缓存" class="headerlink" title="vim缓存"></a>vim缓存</h5><p>kali下进行</p>
+<p>终端：</p>
+<ol>
+<li>wget <a href="http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.index.php.swp">http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.index.php.swp</a></li>
+<li>cat .index.php.swp</li>
+</ol>
+<p>获取flag</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/vim%E7%BC%93%E5%AD%982.png?versionId=CAEQDhiBgIC2uI6oxxciIGMxNDMwNTY4MDMyYTQ5YTZhMzIxYzBkODFlOTRlMDdh"></p>
+<h5 id="DS-Store"><a href="#DS-Store" class="headerlink" title=".DS_Store"></a>.DS_Store</h5><p>同vim缓存</p>
+<p>kali下进行</p>
+<p>终端：</p>
+<ol>
+<li>wget <a href="http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.DS_Store">http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.DS_Store</a></li>
+<li>cat .index.php.swp</li>
+</ol>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/.DS_Store1.png?versionId=CAEQDhiBgICFipSoxxciIDhkZGE4Zjc4MzEzYzRmZDA5M2IwZGE0NzY5NjNmY2Vi"></p>
+<p>浏览器访问：</p>
+<p>网址/cf4390cd5ee7e79529e10649859bd647.txt</p>
+<p>获取flag</p>
+<h4 id="Git泄露"><a href="#Git泄露" class="headerlink" title="Git泄露"></a>Git泄露</h4><p>当前大量开发人员使用git进行版本控制，对站点自动部署。如果配置不当,可能会将.git文件夹直接部署到线上环境。这就引起了git泄露漏洞。</p>
+<h5 id="log"><a href="#log" class="headerlink" title="log"></a>log</h5><h6 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h6><p>githack官网上下载下来的是python2版本，如今大多数用的都是python3，所以还需下载一个python2。``</p>
+<p>cmd中输入python所调用的脚本是环境变量中前面的那一个，如果每一次切换版本还需要更改环境变量也太麻烦了，所以可以使用命令来切换。</p>
+<p> <strong>py -2调用python2，py -3调用的是python3</strong></p>
+<h6 id="开灶"><a href="#开灶" class="headerlink" title="开灶"></a>开灶</h6><p>githack clone 目标源代码到本地</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">py -2 http:&#x2F;&#x2F;challenge-070d7210e3108a89.sandbox.ctfhub.com_10080&#x2F;.git&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>执行 <code>git log</code> 查看历史记录</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/log1.png?versionId=CAEQFRiBgIDci9X9yxciIDEzOWI4NDFiY2I2MjQ1ZmY5OWRmZmJjYTJlZWUwMWRj"></p>
+<p><code>gie diff 9bd149...</code></p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/log3.png?versionId=CAEQFRiBgIC.i9X9yxciIGRlYWU4NDVmYjBhNDQyYmU4NjI0MTQxMDJkOGQ2NjQ0"></p>
+]]></content>
+      <categories>
+        <category>studylife</category>
+      </categories>
+      <tags>
+        <tag>write up</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2021CISCN国赛</title>
     <url>/2021/05/16/2021CISCN%E5%9B%BD%E8%B5%9B/</url>
     <content><![CDATA[<p>360高考</p>
@@ -77,60 +142,6 @@
       </categories>
       <tags>
         <tag>daily</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ctfhub信息泄露</title>
-    <url>/2021/04/17/ctfhub%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2wp/</url>
-    <content><![CDATA[<p>ctfhub web之信息泄露</p>
-<span id="more"></span>
-
-<h4 id="目录遍历与PHPINFO"><a href="#目录遍历与PHPINFO" class="headerlink" title="目录遍历与PHPINFO"></a>目录遍历与PHPINFO</h4><p>0难度</p>
-<h5 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h5><p>依次打开文件夹即可，共16种可能，flag为随机出现</p>
-<p>属于签到题</p>
-<h5 id="PHPINFO"><a href="#PHPINFO" class="headerlink" title="PHPINFO"></a>PHPINFO</h5><p>页面内查找关键字”ctfhub”get flag </p>
-<h4 id="备份文件下载"><a href="#备份文件下载" class="headerlink" title="备份文件下载"></a>备份文件下载</h4><h5 id="网站源码"><a href="#网站源码" class="headerlink" title="网站源码"></a>网站源码</h5><p>当开发人员在线上环境中对源代码进行了备份操作，并且将备份文件放在了 web 目录下，就会引起网站源码泄露。</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%811.png?versionId=CAEQDhiBgIDF5vaLxxciIDBjZmZkNDQ5ZGUxOTRkMjBhYzAwNjFjNTdlMTViMGVi"></p>
-<p>dirsearch扫描</p>
-<p>命令如下（windows环境）：</p>
-<p>python dirsearch.py -u 网址 -e php 或 python .\dirsearch.py -u 网址 -e php</p>
-<p>扫描结果</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%813.png?versionId=CAEQDhiBgICCnPqnxxciIDI5MmE3OGY5M2JmMTRhODc5OTM3ZjFkMWYwODI1YTQz"></p>
-<p>网址+<a href="http://www.zip下载三个文件/">www.zip下载三个文件</a></p>
-<p>最终网站访问获得flag</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%81.png?versionId=CAEQDhiBgMCGnPqnxxciIDYwYjcxYjhiNTk3OTQzYjk4OWVhNzc0MDIxNzBlNTVj"></p>
-<h5 id="bak文件"><a href="#bak文件" class="headerlink" title="bak文件"></a>bak文件</h5><p>dirsearch扫描</p>
-<p>获取三个文件</p>
-<p><strong>/index.php</strong></p>
-<p><strong>/index.php.bak</strong></p>
-<p><strong>/index.php/llogin/</strong></p>
-<p>浏览器网址+/index.php.bak打开</p>
-<p>下载完成后打开获取flag</p>
-<h5 id="vim缓存"><a href="#vim缓存" class="headerlink" title="vim缓存"></a>vim缓存</h5><p>kali下进行</p>
-<p>终端：</p>
-<ol>
-<li>wget <a href="http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.index.php.swp">http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.index.php.swp</a></li>
-<li>cat .index.php.swp</li>
-</ol>
-<p>获取flag</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/vim%E7%BC%93%E5%AD%982.png?versionId=CAEQDhiBgIC2uI6oxxciIGMxNDMwNTY4MDMyYTQ5YTZhMzIxYzBkODFlOTRlMDdh"></p>
-<h5 id="DS-Store"><a href="#DS-Store" class="headerlink" title=".DS_Store"></a>.DS_Store</h5><p>同vim缓存</p>
-<p>kali下进行</p>
-<p>终端：</p>
-<ol>
-<li>wget <a href="http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.DS_Store">http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.DS_Store</a></li>
-<li>cat .index.php.swp</li>
-</ol>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/.DS_Store1.png?versionId=CAEQDhiBgICFipSoxxciIDhkZGE4Zjc4MzEzYzRmZDA5M2IwZGE0NzY5NjNmY2Vi"></p>
-<p>浏览器访问：</p>
-<p>网址/cf4390cd5ee7e79529e10649859bd647.txt</p>
-<p>获取flag</p>
-<h4 id="Git泄露"><a href="#Git泄露" class="headerlink" title="Git泄露"></a>Git泄露</h4><h5 id="log"><a href="#log" class="headerlink" title="log"></a>log</h5>]]></content>
-      <categories>
-        <category>studylife</category>
-      </categories>
-      <tags>
-        <tag>write up</tag>
       </tags>
   </entry>
   <entry>
