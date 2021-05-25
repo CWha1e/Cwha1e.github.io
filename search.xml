@@ -1,6 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ctfhub文件上传</title>
+    <url>/2021/04/15/ctfhub%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0wp/</url>
+    <content><![CDATA[<p>ctfhub web之文件上传</p>
+<span id="more"></span>
+
+<h4 id="无验证"><a href="#无验证" class="headerlink" title="无验证"></a>无验证</h4><p>编写一句话木马并上传<br><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC.png?versionId=CAEQDhiBgIDlw6TgxhciIDZkODI4ZmVkNzJhYjQxMjBiN2JkYjIzODM3OTc0OWE0"></p>
+<p>获取相对路径</p>
+<p>upload/shell.php</p>
+<p>打开中国蚁剑上传</p>
+<p>右键–&gt;添加数据–&gt;网址+相对路径–&gt;打开flag.php</p>
+<p>获取flag</p>
+<h4 id="前端验证"><a href="#前端验证" class="headerlink" title="前端验证"></a>前端验证</h4><p>右键查看源码，发现该网站只支持”jpg”、”png”、”gif”,所以将一句话木马后缀名添加”.jpg”上传</p>
+<p>burp suite抓包–&gt;将一句话木马后缀名恢复成”.php”，放包</p>
+<p>上蚁剑。</p>
+<h4 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess</h4><h5 id="htaccess是什么？"><a href="#htaccess是什么？" class="headerlink" title=".htaccess是什么？"></a>.htaccess是什么？</h5><p> .htaccess叫分布式配置文件，全称是Hypertext Access(超文本入口),它提供了针对目录改变配置的方法——在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。并且子目录中的指令会覆盖更高级目录或者主服务器配置文件中的指令。</p>
+<p>作为用户，所能使用的命令受到限制。管理员可以通过Apache的AllowOverride指令来设置。.htaccess文件是用于apache服务器下的控制文件访问的配置文件，因此Nginx下是不会生效的。.htaccess可以帮我们实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许/阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档、文件的跳转等功能。</p>
+<h5 id="htaccess-文件上传漏洞原理："><a href="#htaccess-文件上传漏洞原理：" class="headerlink" title=".htaccess 文件上传漏洞原理："></a>.htaccess 文件上传漏洞原理：</h5><p>一般.htaccess可以用来留后门和针对黑名单绕过</p>
+<p>创建一个txt写入：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">AddType application&#x2F;x-httpd-php .jpg</span><br></pre></td></tr></table></figure>
+
+<p>把”jpg”文件当作”php”文件解析</p>
+<p>重命名为”.htaccess”</p>
+<p>另一种做法：封装：<br>&lt;FilesMatch “1”&gt;<br>SetHandler application/x-httpd-php<br><br>此方法将名为”1”的文件解析为”php”</p>
+<h5 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h5><p>上传”.htaccess”文件，提交</p>
+<p>目的是替换原有的”.htaccess”文件</p>
+<p>上传”一句话木马.jpg”，提交</p>
+<p>上蚁剑。</p>
+<h4 id="MEMI绕过"><a href="#MEMI绕过" class="headerlink" title="MEMI绕过"></a>MEMI绕过</h4><h5 id="什么是MEMI"><a href="#什么是MEMI" class="headerlink" title="什么是MEMI"></a>什么是MEMI</h5><p>MIME(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。</p>
+<h5 id="MEMI绕过的原理"><a href="#MEMI绕过的原理" class="headerlink" title="MEMI绕过的原理"></a>MEMI绕过的原理</h5><p>部分Web应用系统判定文件类型是通过content-type字段，黑客可以通过抓包，将content-type字段改为常见的图片类型，如image/gif，从而绕过校验。</p>
+<h5 id="常见的MIME类型"><a href="#常见的MIME类型" class="headerlink" title="常见的MIME类型"></a>常见的MIME类型</h5><p>text/plain（纯文本）<br>text/html（HTML文档）<br>text/javascript（js代码）<br>application/xhtml+xml（XHTML文档）<br>image/gif（GIF图像）<br>image/jpeg（JPEG图像）<br>image/png（PNG图像）<br>video/mpeg（MPEG动画）<br>application/octet-stream（二进制数据）<br>application/pdf（PDF文档）</p>
+<h5 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h5><p>上传”一句话木马.php”,Burp Suit抓包</p>
+<p>raw栏，修改Conte-Type: application/octet-stream为</p>
+<p>Conte-Type: image/png</p>
+<p>放包</p>
+<p>上蚁剑。</p>
+<h4 id="文件头检查"><a href="#文件头检查" class="headerlink" title="文件头检查"></a>文件头检查</h4><p>提交”一句话木马.php”文件后报错，返回为只允许”jpeg,jpg,png,gif”类型文件</p>
+<p>上传”一句话木马.php”，Burp Suite抓包；</p>
+<p>修改Content-Type: image/gif</p>
+<p>给一句话木马前添加”gif”文件的文件头，”GIF89a”,放包；</p>
+<p>上蚁剑。</p>
+<h4 id="00截断"><a href="#00截断" class="headerlink" title="00截断"></a>00截断</h4><p>先上个图</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD1.png?versionId=CAEQDhiBgID3vcP3xhciIGVlYmM3NzYzNzgzNjQ1M2Q5ZGI3ZWU0NTAzOTAzMDE4"></p>
+<h5 id="什么是00截断"><a href="#什么是00截断" class="headerlink" title="什么是00截断"></a>什么是00截断</h5><p>00截断的原理，就是利用0x00是字符串的结束标识符，攻击者可以利用手动添加字符串标识符的方式来将后面的内容进行截断，而后面的内容又可以帮助我们绕过检测。</p>
+<p>需要注意的是，0x00截断是16进制的截断，需要修改16进制的数据头，如果使用burp，就要在Hex中对数据进行改写。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">00截断的限制条件是PHP&lt;5.3.29，且GPC关闭，一般在url上</span><br></pre></td></tr></table></figure>
+
+<p>在url中 %00 表示ascll码中的 0 ，而ascii中0作为特殊字符保留，表示字符串结束，所以当url中出现%00时就会认为读取已结束。</p>
+<h5 id="表达方式"><a href="#表达方式" class="headerlink" title="表达方式"></a>表达方式</h5><p>0x00 ， %00 ， /00 </p>
+<h5 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h5><p>上传”一句话木马.php%00.jpg”时，后台读取到”一句话木马.php”就停止了。</p>
+<h5 id="解题-2"><a href="#解题-2" class="headerlink" title="解题"></a>解题</h5><p>上传一句话”1.php”，BP抓包</p>
+<p>修改如下</p>
+<ol>
+<li>Post添加1.php%00</li>
+<li>filename修改为”1.jpg”</li>
+</ol>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD2.png?versionId=CAEQDhiBgMD2k77.xhciIGRjNThlNDE0Yjc1MDQ4NGFiMzAzNjJkNzRjMzIwMTI1"></p>
+<p>放包</p>
+<p>上蚁剑？</p>
+<p>踩坑预警</p>
+<p><a href="http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/?road=/var/www/html/upload/1.php">http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/?road=/var/www/html/upload/1.php</a></p>
+<p>错误演示</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD4.png?versionId=CAEQDhiBgMCArsz.xhciIGU4ZjRhNzI1OWFkZDQ5MjdhMWRlMTkxOTc2MTZhMjhi"></p>
+<p>将”?road=/var/www/html”删除，直接访问</p>
+<p><a href="http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/upload/1.php">http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/upload/1.php</a></p>
+<p>正确连法</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD3.png?versionId=CAEQDhiBgMDrk77.xhciIDkxOGRjOTJlZjA5NjRkYWNhZThhMTkwMDQ0YmY4YjBk"></p>
+<p>粘贴一段原话</p>
+<p><em><u>“action=?road=var/www/html/upload/“和$des = $_GET[‘road’] . “/“ . rand(10, 99) . date(“YmdHis”) . “.” . $ext;这段代码的意思是将上传的文件放在upload文件夹中，而直接访问?road=var/www/html/upload/会再次调用代码（本来会报错，但@和服务器端都抑制了报错），所以只需要访问/upload/1.php就可以了</u></em></p>
+<p>连接成功，获取flag！</p>
+<h4 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h4><p>打开靶机上传一句话成功后发现并不是我们想要的结果</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E5%8F%8C%E5%86%99%E7%BB%95%E8%BF%871.png?versionId=CAEQDhiBgMC4_IH_xhciIDU0Y2EwNTc2ZjRlZjQ1ZGM5MTQ5MTcyZGVmOTU3ZmQ0"></p>
+<p>根据提示使用双写绕过：</p>
+<p>BP抓包；</p>
+<p>将文件后缀名修改为”pphphp”；</p>
+<p>放包；</p>
+<p>上蚁剑。</p>
+<p>至此文件上传告一段落</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0.png?versionId=CAEQDhiBgIDqj4f_xhciIGIxZWYxZmZhMGY1NjQ0ZWRhOTc5ODUxYTljYjE2NTZk"></p>
+]]></content>
+      <categories>
+        <category>web</category>
+        <category>write up</category>
+      </categories>
+      <tags>
+        <tag>exercise</tag>
+        <tag>文件上传</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfhub信息泄露</title>
+    <url>/2021/04/17/ctfhub%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2wp/</url>
+    <content><![CDATA[<p>ctfhub web之信息泄露</p>
+<span id="more"></span>
+
+<h4 id="目录遍历与PHPINFO"><a href="#目录遍历与PHPINFO" class="headerlink" title="目录遍历与PHPINFO"></a>目录遍历与PHPINFO</h4><p>0难度</p>
+<h5 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h5><p>依次打开文件夹即可，共16种可能，flag为随机出现</p>
+<p>属于签到题</p>
+<h5 id="PHPINFO"><a href="#PHPINFO" class="headerlink" title="PHPINFO"></a>PHPINFO</h5><p>页面内查找关键字”ctfhub”get flag </p>
+<h4 id="备份文件下载"><a href="#备份文件下载" class="headerlink" title="备份文件下载"></a>备份文件下载</h4><h5 id="网站源码"><a href="#网站源码" class="headerlink" title="网站源码"></a>网站源码</h5><p>当开发人员在线上环境中对源代码进行了备份操作，并且将备份文件放在了 web 目录下，就会引起网站源码泄露。</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%811.png?versionId=CAEQDhiBgIDF5vaLxxciIDBjZmZkNDQ5ZGUxOTRkMjBhYzAwNjFjNTdlMTViMGVi"></p>
+<p>dirsearch扫描</p>
+<p>命令如下（windows环境）：</p>
+<p>python dirsearch.py -u 网址 -e php 或 python .\dirsearch.py -u 网址 -e php</p>
+<p>扫描结果</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%813.png?versionId=CAEQDhiBgICCnPqnxxciIDI5MmE3OGY5M2JmMTRhODc5OTM3ZjFkMWYwODI1YTQz"></p>
+<p>网址+<a href="http://www.zip下载三个文件/">www.zip下载三个文件</a></p>
+<p>最终网站访问获得flag</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%81.png?versionId=CAEQDhiBgMCGnPqnxxciIDYwYjcxYjhiNTk3OTQzYjk4OWVhNzc0MDIxNzBlNTVj"></p>
+<h5 id="bak文件"><a href="#bak文件" class="headerlink" title="bak文件"></a>bak文件</h5><p>dirsearch扫描</p>
+<p>获取三个文件</p>
+<p><strong>/index.php</strong></p>
+<p><strong>/index.php.bak</strong></p>
+<p><strong>/index.php/llogin/</strong></p>
+<p>浏览器网址+/index.php.bak打开</p>
+<p>下载完成后打开获取flag</p>
+<h5 id="vim缓存"><a href="#vim缓存" class="headerlink" title="vim缓存"></a>vim缓存</h5><p>kali下进行</p>
+<p>终端：</p>
+<ol>
+<li>wget <a href="http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.index.php.swp">http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.index.php.swp</a></li>
+<li>cat .index.php.swp</li>
+</ol>
+<p>获取flag</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/vim%E7%BC%93%E5%AD%982.png?versionId=CAEQDhiBgIC2uI6oxxciIGMxNDMwNTY4MDMyYTQ5YTZhMzIxYzBkODFlOTRlMDdh"></p>
+<h5 id="DS-Store"><a href="#DS-Store" class="headerlink" title=".DS_Store"></a>.DS_Store</h5><p>同vim缓存</p>
+<p>kali下进行</p>
+<p>终端：</p>
+<ol>
+<li>wget <a href="http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.DS_Store">http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.DS_Store</a></li>
+<li>cat .index.php.swp</li>
+</ol>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/.DS_Store1.png?versionId=CAEQDhiBgICFipSoxxciIDhkZGE4Zjc4MzEzYzRmZDA5M2IwZGE0NzY5NjNmY2Vi"></p>
+<p>浏览器访问：</p>
+<p>网址/cf4390cd5ee7e79529e10649859bd647.txt</p>
+<p>获取flag</p>
+<h4 id="Git泄露"><a href="#Git泄露" class="headerlink" title="Git泄露"></a>Git泄露</h4><p>当前大量开发人员使用git进行版本控制，对站点自动部署。如果配置不当,可能会将.git文件夹直接部署到线上环境。这就引起了git泄露漏洞。</p>
+<h5 id="log"><a href="#log" class="headerlink" title="log"></a>log</h5><h6 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h6><p>githack官网上下载下来的是python2版本，如今大多数用的都是python3，所以还需下载一个python2。``</p>
+<p>cmd中输入python所调用的脚本是环境变量中前面的那一个，如果每一次切换版本还需要更改环境变量也太麻烦了，所以可以使用命令来切换。</p>
+<p> <strong>py -2调用python2，py -3调用的是python3</strong></p>
+<h6 id="开灶"><a href="#开灶" class="headerlink" title="开灶"></a>开灶</h6><p>githack clone 目标源代码到本地</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">py -2 http:&#x2F;&#x2F;challenge-070d7210e3108a89.sandbox.ctfhub.com_10080&#x2F;.git&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>执行 <code>git log</code> 查看历史记录</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/log1.png?versionId=CAEQFRiBgIDci9X9yxciIDEzOWI4NDFiY2I2MjQ1ZmY5OWRmZmJjYTJlZWUwMWRj"></p>
+<p><code>git diff 9bd149...</code></p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/log3.png?versionId=CAEQFRiBgIC.i9X9yxciIGRlYWU4NDVmYjBhNDQyYmU4NjI0MTQxMDJkOGQ2NjQ0"></p>
+<h5 id="stash"><a href="#stash" class="headerlink" title="stash"></a>stash</h5><h6 id="git-stash-的作用"><a href="#git-stash-的作用" class="headerlink" title="git stash 的作用"></a>git stash 的作用</h6><p>git stash用于想要保存当前的修改,但是想回到之前最后一次提交的干净的工作仓库时进行的操作.git stash将本地的修改保存起来,并且将当前代码切换到HEAD提交上.</p>
+<p>通过git stash存储的修改列表,可以通过git stash list查看.git stash show用于校验,git stash apply用于重新存储.直接执行git stash等同于git stash save.</p>
+<p>最新的存储保存在refs/stash中.老的存储可以通过相关的参数获得,例如stash@{0}获取最新的存储,stash@{1}获取次新.stash@{2.hour.ago}获取两小时之前的.存储可以直接通过索引的位置来获得stash@{n}.</p>
+<h6 id="开灶-1"><a href="#开灶-1" class="headerlink" title="开灶"></a>开灶</h6><p>githack clone–&gt;git log</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/stash1.png?versionId=CAEQFRiBgIDCiIr.yxciIGQ5ZDk4YTFhYTM5ZTQ5ODliNzRhYjMyNGU5MmUxY2Nh"></p>
+<p>执行 git stash list 发现有 stash,然后git stash pop </p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/stash2.png?versionId=CAEQFRiBgMCMiIr.yxciIDFlMjk3ZTk5YzU5NjRmYjk5YmI2Mjk4NTJlNDI4MDYx"></p>
+<p>再次git diff 6458b52874b51846c2ca53a26b0add249369b532</p>
+<p>get flag</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/stash3.png?versionId=CAEQFRiBgMCqiIr.yxciIDliMmVjZGQ4YzQzNDQ2OTE4ZjkyMTM0OGYyMzJjMThk"></p>
+<h5 id="index"><a href="#index" class="headerlink" title="index"></a>index</h5><p>因为实在太混所以一直对着wp写的，尝试自己做一题，结果githack clone下来后就打开文件夹就最直接存在<strong>flag.txt</strong>。</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/index1.png?versionId=CAEQFRiBgID31IOKzBciIDNlMmMyNDFmYzM0ODRlZGJiZDU1YjEyZGU1ZDYwMGI4"></p>
+<h4 id="SVN泄露与HG泄露"><a href="#SVN泄露与HG泄露" class="headerlink" title="SVN泄露与HG泄露"></a>SVN泄露与HG泄露</h4><h5 id="SVN泄露"><a href="#SVN泄露" class="headerlink" title="SVN泄露"></a>SVN泄露</h5><h6 id="写在前面-1"><a href="#写在前面-1" class="headerlink" title="写在前面"></a>写在前面</h6><p>当开发人员使用 SVN 进行版本控制，对站点自动部署。如果配置不当,可能会将.svn文件夹直接部署到线上环境。这就引起了 SVN 泄露漏洞。</p>
+<h6 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h6><p>dvcs-ripper中的rip-svn.pl clone下来</p>
+<p>前期因为命令错误一直导致clone失败，正确命令：</p>
+<p><code>perl rip-svn.pl -v -u http://120.132.56.20:1515/.svn/</code></p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/.svn1.png?versionId=CAEQFhiBgICkofPkzBciIDA5MmQ3ZDUwNDQyNDRkNGU5NWYwZmExMDZlYWRjOGY2"></p>
+<p><code>tree .svn</code></p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/.svn2.png?versionId=CAEQFhiBgMDhofPkzBciIDVlZTZkZDZlNDM4MzQzM2I5ZGZmM2Q4ZGMyOTY1NmMy"></p>
+<p><code>cd .svn/pristine/</code></p>
+<p><code>cat 00/00c73b1c8ee0f1d111180fb329e39c7f8dce7900.svn-base</code></p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/.svn3.png?versionId=CAEQFhiBgMClofPkzBciIGJmNWFjZmZjMjI0MTQyMzdiNjlhMjIzYTNmZWY3MjNl"></p>
+<p>get  flag</p>
+<h5 id="hg泄露"><a href="#hg泄露" class="headerlink" title="hg泄露"></a>hg泄露</h5><h6 id="写在前面-2"><a href="#写在前面-2" class="headerlink" title="写在前面"></a>写在前面</h6><p>当开发人员使用 Mercurial 进行版本控制，对站点自动部署。如果配置不当,可能会将.hg 文件夹直接部署到线上环境。这就引起了 hg 泄露漏洞。</p>
+<h6 id="开灶-2"><a href="#开灶-2" class="headerlink" title="开灶"></a>开灶</h6><p>使用 <code>dvcs-ripper</code> 工具中的 <code>rip-hg.pl</code> 脚本进行 clone。</p>
+<p>发现直接执行 hg status 出错，工具 clone 的时候并没有 clone 完整，再次证明不能过分相信工具不要过分迷信工具。</p>
+<p>查看<code>.hg/store/fncache</code></p>
+<p>可知flag文件名为<code>flag_2592426997.txt</code></p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/hg1.png?versionId=CAEQFRiBgICQ5b6SzBciIDg1NDhjMGI5OTVhNjRlMDBiMTMwMTYyZGFlYzdjMWYy"></p>
+<p>浏览器直接访问获得flag</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/hg2.png?versionId=CAEQFRiBgMD35L6SzBciIDc4YThjNTg3YTRkODQ1Mzk5ZDAxOWNjMmFjNWU0M2E4"></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>ctfhub信息泄露就此上传完毕</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2.png?versionId=CAEQFhiBgID7hfzkzBciIDI3NzVjYzJiNTk0ODRiZTA4YjM1NmZkMWI3NTAwOGFl"></p>
+<p>学艺不精所以题目都是看着wp完成的，有很多疑问来不及解决，留下了许多空白，需要不断学习来回头补充。</p>
+]]></content>
+      <categories>
+        <category>web</category>
+        <category>write up</category>
+      </categories>
+      <tags>
+        <tag>信息泄露</tag>
+        <tag>exercise</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>蚁剑使用</title>
     <url>/2021/04/15/%E4%B8%AD%E5%9B%BD%E8%9A%81%E5%89%91%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[<p>中国蚁剑一把梭</p>
@@ -119,196 +309,6 @@
       <tags>
         <tag>note</tag>
         <tag>sql注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ctfhub信息泄露</title>
-    <url>/2021/04/17/ctfhub%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2wp/</url>
-    <content><![CDATA[<p>ctfhub web之信息泄露</p>
-<span id="more"></span>
-
-<h4 id="目录遍历与PHPINFO"><a href="#目录遍历与PHPINFO" class="headerlink" title="目录遍历与PHPINFO"></a>目录遍历与PHPINFO</h4><p>0难度</p>
-<h5 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h5><p>依次打开文件夹即可，共16种可能，flag为随机出现</p>
-<p>属于签到题</p>
-<h5 id="PHPINFO"><a href="#PHPINFO" class="headerlink" title="PHPINFO"></a>PHPINFO</h5><p>页面内查找关键字”ctfhub”get flag </p>
-<h4 id="备份文件下载"><a href="#备份文件下载" class="headerlink" title="备份文件下载"></a>备份文件下载</h4><h5 id="网站源码"><a href="#网站源码" class="headerlink" title="网站源码"></a>网站源码</h5><p>当开发人员在线上环境中对源代码进行了备份操作，并且将备份文件放在了 web 目录下，就会引起网站源码泄露。</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%811.png?versionId=CAEQDhiBgIDF5vaLxxciIDBjZmZkNDQ5ZGUxOTRkMjBhYzAwNjFjNTdlMTViMGVi"></p>
-<p>dirsearch扫描</p>
-<p>命令如下（windows环境）：</p>
-<p>python dirsearch.py -u 网址 -e php 或 python .\dirsearch.py -u 网址 -e php</p>
-<p>扫描结果</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%813.png?versionId=CAEQDhiBgICCnPqnxxciIDI5MmE3OGY5M2JmMTRhODc5OTM3ZjFkMWYwODI1YTQz"></p>
-<p>网址+<a href="http://www.zip下载三个文件/">www.zip下载三个文件</a></p>
-<p>最终网站访问获得flag</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E6%BA%90%E7%A0%81.png?versionId=CAEQDhiBgMCGnPqnxxciIDYwYjcxYjhiNTk3OTQzYjk4OWVhNzc0MDIxNzBlNTVj"></p>
-<h5 id="bak文件"><a href="#bak文件" class="headerlink" title="bak文件"></a>bak文件</h5><p>dirsearch扫描</p>
-<p>获取三个文件</p>
-<p><strong>/index.php</strong></p>
-<p><strong>/index.php.bak</strong></p>
-<p><strong>/index.php/llogin/</strong></p>
-<p>浏览器网址+/index.php.bak打开</p>
-<p>下载完成后打开获取flag</p>
-<h5 id="vim缓存"><a href="#vim缓存" class="headerlink" title="vim缓存"></a>vim缓存</h5><p>kali下进行</p>
-<p>终端：</p>
-<ol>
-<li>wget <a href="http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.index.php.swp">http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.index.php.swp</a></li>
-<li>cat .index.php.swp</li>
-</ol>
-<p>获取flag</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/vim%E7%BC%93%E5%AD%982.png?versionId=CAEQDhiBgIC2uI6oxxciIGMxNDMwNTY4MDMyYTQ5YTZhMzIxYzBkODFlOTRlMDdh"></p>
-<h5 id="DS-Store"><a href="#DS-Store" class="headerlink" title=".DS_Store"></a>.DS_Store</h5><p>同vim缓存</p>
-<p>kali下进行</p>
-<p>终端：</p>
-<ol>
-<li>wget <a href="http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.DS_Store">http://challenge-0179187a5798aa64.sandbox.ctfhub.com:10080/.DS_Store</a></li>
-<li>cat .index.php.swp</li>
-</ol>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/.DS_Store1.png?versionId=CAEQDhiBgICFipSoxxciIDhkZGE4Zjc4MzEzYzRmZDA5M2IwZGE0NzY5NjNmY2Vi"></p>
-<p>浏览器访问：</p>
-<p>网址/cf4390cd5ee7e79529e10649859bd647.txt</p>
-<p>获取flag</p>
-<h4 id="Git泄露"><a href="#Git泄露" class="headerlink" title="Git泄露"></a>Git泄露</h4><p>当前大量开发人员使用git进行版本控制，对站点自动部署。如果配置不当,可能会将.git文件夹直接部署到线上环境。这就引起了git泄露漏洞。</p>
-<h5 id="log"><a href="#log" class="headerlink" title="log"></a>log</h5><h6 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h6><p>githack官网上下载下来的是python2版本，如今大多数用的都是python3，所以还需下载一个python2。``</p>
-<p>cmd中输入python所调用的脚本是环境变量中前面的那一个，如果每一次切换版本还需要更改环境变量也太麻烦了，所以可以使用命令来切换。</p>
-<p> <strong>py -2调用python2，py -3调用的是python3</strong></p>
-<h6 id="开灶"><a href="#开灶" class="headerlink" title="开灶"></a>开灶</h6><p>githack clone 目标源代码到本地</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">py -2 http:&#x2F;&#x2F;challenge-070d7210e3108a89.sandbox.ctfhub.com_10080&#x2F;.git&#x2F;</span><br></pre></td></tr></table></figure>
-
-<p>执行 <code>git log</code> 查看历史记录</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/log1.png?versionId=CAEQFRiBgIDci9X9yxciIDEzOWI4NDFiY2I2MjQ1ZmY5OWRmZmJjYTJlZWUwMWRj"></p>
-<p><code>git diff 9bd149...</code></p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/log3.png?versionId=CAEQFRiBgIC.i9X9yxciIGRlYWU4NDVmYjBhNDQyYmU4NjI0MTQxMDJkOGQ2NjQ0"></p>
-<h5 id="stash"><a href="#stash" class="headerlink" title="stash"></a>stash</h5><h6 id="git-stash-的作用"><a href="#git-stash-的作用" class="headerlink" title="git stash 的作用"></a>git stash 的作用</h6><p>git stash用于想要保存当前的修改,但是想回到之前最后一次提交的干净的工作仓库时进行的操作.git stash将本地的修改保存起来,并且将当前代码切换到HEAD提交上.</p>
-<p>通过git stash存储的修改列表,可以通过git stash list查看.git stash show用于校验,git stash apply用于重新存储.直接执行git stash等同于git stash save.</p>
-<p>最新的存储保存在refs/stash中.老的存储可以通过相关的参数获得,例如stash@{0}获取最新的存储,stash@{1}获取次新.stash@{2.hour.ago}获取两小时之前的.存储可以直接通过索引的位置来获得stash@{n}.</p>
-<h6 id="开灶-1"><a href="#开灶-1" class="headerlink" title="开灶"></a>开灶</h6><p>githack clone–&gt;git log</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/stash1.png?versionId=CAEQFRiBgIDCiIr.yxciIGQ5ZDk4YTFhYTM5ZTQ5ODliNzRhYjMyNGU5MmUxY2Nh"></p>
-<p>执行 git stash list 发现有 stash,然后git stash pop </p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/stash2.png?versionId=CAEQFRiBgMCMiIr.yxciIDFlMjk3ZTk5YzU5NjRmYjk5YmI2Mjk4NTJlNDI4MDYx"></p>
-<p>再次git diff 6458b52874b51846c2ca53a26b0add249369b532</p>
-<p>get flag</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/stash3.png?versionId=CAEQFRiBgMCqiIr.yxciIDliMmVjZGQ4YzQzNDQ2OTE4ZjkyMTM0OGYyMzJjMThk"></p>
-<h5 id="index"><a href="#index" class="headerlink" title="index"></a>index</h5><p>因为实在太混所以一直对着wp写的，尝试自己做一题，结果githack clone下来后就打开文件夹就最直接存在<strong>flag.txt</strong>。</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/index1.png?versionId=CAEQFRiBgID31IOKzBciIDNlMmMyNDFmYzM0ODRlZGJiZDU1YjEyZGU1ZDYwMGI4"></p>
-<h4 id="SVN泄露与HG泄露"><a href="#SVN泄露与HG泄露" class="headerlink" title="SVN泄露与HG泄露"></a>SVN泄露与HG泄露</h4><h5 id="SVN泄露"><a href="#SVN泄露" class="headerlink" title="SVN泄露"></a>SVN泄露</h5><h6 id="写在前面-1"><a href="#写在前面-1" class="headerlink" title="写在前面"></a>写在前面</h6><p>当开发人员使用 SVN 进行版本控制，对站点自动部署。如果配置不当,可能会将.svn文件夹直接部署到线上环境。这就引起了 SVN 泄露漏洞。</p>
-<h6 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h6><p>dvcs-ripper中的rip-svn.pl clone下来</p>
-<p>前期因为命令错误一直导致clone失败，正确命令：</p>
-<p><code>perl rip-svn.pl -v -u http://120.132.56.20:1515/.svn/</code></p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/.svn1.png?versionId=CAEQFhiBgICkofPkzBciIDA5MmQ3ZDUwNDQyNDRkNGU5NWYwZmExMDZlYWRjOGY2"></p>
-<p><code>tree .svn</code></p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/.svn2.png?versionId=CAEQFhiBgMDhofPkzBciIDVlZTZkZDZlNDM4MzQzM2I5ZGZmM2Q4ZGMyOTY1NmMy"></p>
-<p><code>cd .svn/pristine/</code></p>
-<p><code>cat 00/00c73b1c8ee0f1d111180fb329e39c7f8dce7900.svn-base</code></p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/.svn3.png?versionId=CAEQFhiBgMClofPkzBciIGJmNWFjZmZjMjI0MTQyMzdiNjlhMjIzYTNmZWY3MjNl"></p>
-<p>get  flag</p>
-<h5 id="hg泄露"><a href="#hg泄露" class="headerlink" title="hg泄露"></a>hg泄露</h5><h6 id="写在前面-2"><a href="#写在前面-2" class="headerlink" title="写在前面"></a>写在前面</h6><p>当开发人员使用 Mercurial 进行版本控制，对站点自动部署。如果配置不当,可能会将.hg 文件夹直接部署到线上环境。这就引起了 hg 泄露漏洞。</p>
-<h6 id="开灶-2"><a href="#开灶-2" class="headerlink" title="开灶"></a>开灶</h6><p>使用 <code>dvcs-ripper</code> 工具中的 <code>rip-hg.pl</code> 脚本进行 clone。</p>
-<p>发现直接执行 hg status 出错，工具 clone 的时候并没有 clone 完整，再次证明不能过分相信工具不要过分迷信工具。</p>
-<p>查看<code>.hg/store/fncache</code></p>
-<p>可知flag文件名为<code>flag_2592426997.txt</code></p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/hg1.png?versionId=CAEQFRiBgICQ5b6SzBciIDg1NDhjMGI5OTVhNjRlMDBiMTMwMTYyZGFlYzdjMWYy"></p>
-<p>浏览器直接访问获得flag</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/hg2.png?versionId=CAEQFRiBgMD35L6SzBciIDc4YThjNTg3YTRkODQ1Mzk5ZDAxOWNjMmFjNWU0M2E4"></p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>ctfhub信息泄露就此上传完毕</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2.png?versionId=CAEQFhiBgID7hfzkzBciIDI3NzVjYzJiNTk0ODRiZTA4YjM1NmZkMWI3NTAwOGFl"></p>
-<p>学艺不精所以题目都是看着wp完成的，有很多疑问来不及解决，留下了许多空白，需要不断学习来回头补充。</p>
-]]></content>
-      <categories>
-        <category>write up</category>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>信息泄露</tag>
-        <tag>exercise</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ctfhub文件上传</title>
-    <url>/2021/04/15/ctfhub%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0wp/</url>
-    <content><![CDATA[<p>ctfhub web之文件上传</p>
-<span id="more"></span>
-
-<h4 id="无验证"><a href="#无验证" class="headerlink" title="无验证"></a>无验证</h4><p>编写一句话木马并上传<br><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC.png?versionId=CAEQDhiBgIDlw6TgxhciIDZkODI4ZmVkNzJhYjQxMjBiN2JkYjIzODM3OTc0OWE0"></p>
-<p>获取相对路径</p>
-<p>upload/shell.php</p>
-<p>打开中国蚁剑上传</p>
-<p>右键–&gt;添加数据–&gt;网址+相对路径–&gt;打开flag.php</p>
-<p>获取flag</p>
-<h4 id="前端验证"><a href="#前端验证" class="headerlink" title="前端验证"></a>前端验证</h4><p>右键查看源码，发现该网站只支持”jpg”、”png”、”gif”,所以将一句话木马后缀名添加”.jpg”上传</p>
-<p>burp suite抓包–&gt;将一句话木马后缀名恢复成”.php”，放包</p>
-<p>上蚁剑。</p>
-<h4 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess</h4><h5 id="htaccess是什么？"><a href="#htaccess是什么？" class="headerlink" title=".htaccess是什么？"></a>.htaccess是什么？</h5><p> .htaccess叫分布式配置文件，全称是Hypertext Access(超文本入口),它提供了针对目录改变配置的方法——在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。并且子目录中的指令会覆盖更高级目录或者主服务器配置文件中的指令。</p>
-<p>作为用户，所能使用的命令受到限制。管理员可以通过Apache的AllowOverride指令来设置。.htaccess文件是用于apache服务器下的控制文件访问的配置文件，因此Nginx下是不会生效的。.htaccess可以帮我们实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许/阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档、文件的跳转等功能。</p>
-<h5 id="htaccess-文件上传漏洞原理："><a href="#htaccess-文件上传漏洞原理：" class="headerlink" title=".htaccess 文件上传漏洞原理："></a>.htaccess 文件上传漏洞原理：</h5><p>一般.htaccess可以用来留后门和针对黑名单绕过</p>
-<p>创建一个txt写入：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">AddType application&#x2F;x-httpd-php .jpg</span><br></pre></td></tr></table></figure>
-
-<p>把”jpg”文件当作”php”文件解析</p>
-<p>重命名为”.htaccess”</p>
-<p>另一种做法：封装：<br>&lt;FilesMatch “1”&gt;<br>SetHandler application/x-httpd-php<br><br>此方法将名为”1”的文件解析为”php”</p>
-<h5 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h5><p>上传”.htaccess”文件，提交</p>
-<p>目的是替换原有的”.htaccess”文件</p>
-<p>上传”一句话木马.jpg”，提交</p>
-<p>上蚁剑。</p>
-<h4 id="MEMI绕过"><a href="#MEMI绕过" class="headerlink" title="MEMI绕过"></a>MEMI绕过</h4><h5 id="什么是MEMI"><a href="#什么是MEMI" class="headerlink" title="什么是MEMI"></a>什么是MEMI</h5><p>MIME(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。</p>
-<h5 id="MEMI绕过的原理"><a href="#MEMI绕过的原理" class="headerlink" title="MEMI绕过的原理"></a>MEMI绕过的原理</h5><p>部分Web应用系统判定文件类型是通过content-type字段，黑客可以通过抓包，将content-type字段改为常见的图片类型，如image/gif，从而绕过校验。</p>
-<h5 id="常见的MIME类型"><a href="#常见的MIME类型" class="headerlink" title="常见的MIME类型"></a>常见的MIME类型</h5><p>text/plain（纯文本）<br>text/html（HTML文档）<br>text/javascript（js代码）<br>application/xhtml+xml（XHTML文档）<br>image/gif（GIF图像）<br>image/jpeg（JPEG图像）<br>image/png（PNG图像）<br>video/mpeg（MPEG动画）<br>application/octet-stream（二进制数据）<br>application/pdf（PDF文档）</p>
-<h5 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h5><p>上传”一句话木马.php”,Burp Suit抓包</p>
-<p>raw栏，修改Conte-Type: application/octet-stream为</p>
-<p>Conte-Type: image/png</p>
-<p>放包</p>
-<p>上蚁剑。</p>
-<h4 id="文件头检查"><a href="#文件头检查" class="headerlink" title="文件头检查"></a>文件头检查</h4><p>提交”一句话木马.php”文件后报错，返回为只允许”jpeg,jpg,png,gif”类型文件</p>
-<p>上传”一句话木马.php”，Burp Suite抓包；</p>
-<p>修改Content-Type: image/gif</p>
-<p>给一句话木马前添加”gif”文件的文件头，”GIF89a”,放包；</p>
-<p>上蚁剑。</p>
-<h4 id="00截断"><a href="#00截断" class="headerlink" title="00截断"></a>00截断</h4><p>先上个图</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD1.png?versionId=CAEQDhiBgID3vcP3xhciIGVlYmM3NzYzNzgzNjQ1M2Q5ZGI3ZWU0NTAzOTAzMDE4"></p>
-<h5 id="什么是00截断"><a href="#什么是00截断" class="headerlink" title="什么是00截断"></a>什么是00截断</h5><p>00截断的原理，就是利用0x00是字符串的结束标识符，攻击者可以利用手动添加字符串标识符的方式来将后面的内容进行截断，而后面的内容又可以帮助我们绕过检测。</p>
-<p>需要注意的是，0x00截断是16进制的截断，需要修改16进制的数据头，如果使用burp，就要在Hex中对数据进行改写。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">00截断的限制条件是PHP&lt;5.3.29，且GPC关闭，一般在url上</span><br></pre></td></tr></table></figure>
-
-<p>在url中 %00 表示ascll码中的 0 ，而ascii中0作为特殊字符保留，表示字符串结束，所以当url中出现%00时就会认为读取已结束。</p>
-<h5 id="表达方式"><a href="#表达方式" class="headerlink" title="表达方式"></a>表达方式</h5><p>0x00 ， %00 ， /00 </p>
-<h5 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h5><p>上传”一句话木马.php%00.jpg”时，后台读取到”一句话木马.php”就停止了。</p>
-<h5 id="解题-2"><a href="#解题-2" class="headerlink" title="解题"></a>解题</h5><p>上传一句话”1.php”，BP抓包</p>
-<p>修改如下</p>
-<ol>
-<li>Post添加1.php%00</li>
-<li>filename修改为”1.jpg”</li>
-</ol>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD2.png?versionId=CAEQDhiBgMD2k77.xhciIGRjNThlNDE0Yjc1MDQ4NGFiMzAzNjJkNzRjMzIwMTI1"></p>
-<p>放包</p>
-<p>上蚁剑？</p>
-<p>踩坑预警</p>
-<p><a href="http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/?road=/var/www/html/upload/1.php">http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/?road=/var/www/html/upload/1.php</a></p>
-<p>错误演示</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD4.png?versionId=CAEQDhiBgMCArsz.xhciIGU4ZjRhNzI1OWFkZDQ5MjdhMWRlMTkxOTc2MTZhMjhi"></p>
-<p>将”?road=/var/www/html”删除，直接访问</p>
-<p><a href="http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/upload/1.php">http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/upload/1.php</a></p>
-<p>正确连法</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD3.png?versionId=CAEQDhiBgMDrk77.xhciIDkxOGRjOTJlZjA5NjRkYWNhZThhMTkwMDQ0YmY4YjBk"></p>
-<p>粘贴一段原话</p>
-<p><em><u>“action=?road=var/www/html/upload/“和$des = $_GET[‘road’] . “/“ . rand(10, 99) . date(“YmdHis”) . “.” . $ext;这段代码的意思是将上传的文件放在upload文件夹中，而直接访问?road=var/www/html/upload/会再次调用代码（本来会报错，但@和服务器端都抑制了报错），所以只需要访问/upload/1.php就可以了</u></em></p>
-<p>连接成功，获取flag！</p>
-<h4 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h4><p>打开靶机上传一句话成功后发现并不是我们想要的结果</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E5%8F%8C%E5%86%99%E7%BB%95%E8%BF%871.png?versionId=CAEQDhiBgMC4_IH_xhciIDU0Y2EwNTc2ZjRlZjQ1ZGM5MTQ5MTcyZGVmOTU3ZmQ0"></p>
-<p>根据提示使用双写绕过：</p>
-<p>BP抓包；</p>
-<p>将文件后缀名修改为”pphphp”；</p>
-<p>放包；</p>
-<p>上蚁剑。</p>
-<p>至此文件上传告一段落</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0.png?versionId=CAEQDhiBgIDqj4f_xhciIGIxZWYxZmZhMGY1NjQ0ZWRhOTc5ODUxYTljYjE2NTZk"></p>
-]]></content>
-      <categories>
-        <category>write up</category>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>exercise</tag>
-        <tag>文件上传</tag>
       </tags>
   </entry>
   <entry>
