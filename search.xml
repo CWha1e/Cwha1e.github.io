@@ -7,6 +7,9 @@
 <span id="more"></span>
 <p>自去年安装好了第一个Linux系统之后就一直有一个困扰我许久的问题–联网。<br>我的第一个Linux系统是Ubuntu，安装简单。但是相较于Ubuntu，我更喜欢专业的kali;因为教程问题，导致安装kali失败N多次，最后在排除法以及仔细阅读了安装时系统提出的问题之后，现在已经可以熟练安装了。<br>迎接安装成功的下一个问题就是断网卡。<br>kali安装时默认net连接自动联网，但是在我有一段时间不使用kali之后，再次开机它就断网卡了。无论我实验网上可以搜集到的各种方法，都无效。于是乎就只有一个办法，重装系统。<br>前几天我的常用kali又又又崩了，出于对内部工具的不舍，不甘心又一次重装，就找了一下PMR帮我用向日葵远端操作一下。结果还是以失败告终。<br>最终问了一下N神，他告诉我这应该是电脑自身的问题，不可以使用VMware挂起，如果要恢复的话就只能使用快照恢复。所以为了避免这种问题，以后我要常备份，不后台挂起。</p>
 ]]></content>
+      <categories>
+        <category>operating system</category>
+      </categories>
       <tags>
         <tag>tool</tag>
       </tags>
@@ -243,8 +246,8 @@
         <category>web</category>
       </categories>
       <tags>
-        <tag>文件上传</tag>
         <tag>write up</tag>
+        <tag>文件上传</tag>
       </tags>
   </entry>
   <entry>
