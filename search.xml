@@ -1,66 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>关于我和kali的安装之路</title>
-    <url>/2021/07/03/%E4%B8%80%E4%B8%AA%E8%B8%A9%E4%BA%86%E5%A4%A7%E5%8D%8A%E5%B9%B4%E7%9A%84%E5%9D%91/</url>
-    <content><![CDATA[<p>一时重装一时爽，一直重装一直爽</p>
+    <title>2021CISCN国赛</title>
+    <url>/2021/05/16/2021CISCN%E5%9B%BD%E8%B5%9B/</url>
+    <content><![CDATA[<p>360高考</p>
 <span id="more"></span>
-<p>自去年安装好了第一个Linux系统之后就一直有一个困扰我许久的问题–联网。<br>我的第一个Linux系统是Ubuntu，安装简单。但是相较于Ubuntu，我更喜欢专业的kali;因为教程问题，导致安装kali失败N多次，最后在排除法以及仔细阅读了安装时系统提出的问题之后，现在已经可以熟练安装了。<br>迎接安装成功的下一个问题就是断网卡。<br>kali安装时默认net连接自动联网，但是在我有一段时间不使用kali之后，再次开机它就断网卡了。无论我实验网上可以搜集到的各种方法，都无效。于是乎就只有一个办法，重装系统。<br>前几天我的常用kali又又又崩了，出于对内部工具的不舍，不甘心又一次重装，就找了一下PMR帮我用向日葵远端操作一下。结果还是以失败告终。<br>最终问了一下N神，他告诉我这应该是电脑自身的问题，不可以使用VMware挂起，如果要恢复的话就只能使用快照恢复。所以为了避免这种问题，以后我要常备份，不后台挂起。</p>
+<p>因为写好的blog居然没保存，且太多题目无法复现，所以先放在一边，回头再写。</p>
 ]]></content>
       <categories>
-        <category>operating system</category>
+        <category>competition</category>
       </categories>
       <tags>
-        <tag>linux</tag>
-        <tag>kali</tag>
+        <tag>write up</tag>
       </tags>
   </entry>
   <entry>
-    <title>sql注入学习</title>
-    <url>/2021/05/23/sql%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>sql注入学习笔记</p>
+    <title>ctfhub文件上传</title>
+    <url>/2021/04/15/ctfhub%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0wp/</url>
+    <content><![CDATA[<p>ctfhub web之文件上传</p>
 <span id="more"></span>
 
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>笔者从完全不懂sql注入开始学习，在广大的互凉网上寻找资源，所以更多内容为搜集到的内容汇总。上传博客的目的是促进自己学习。如果摘抄至某篇博客的内容会附上链接。</p>
-<h1 id="sql注入是什么"><a href="#sql注入是什么" class="headerlink" title="sql注入是什么"></a>sql注入是什么</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p> SQL注入即是指<strong>web应用程序</strong>对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的<strong>SQL语句</strong>，在管理员不知情的情况下实现非法操作，以此来实现欺骗<strong>数据库服务器</strong>执行非授权的任意查询，从而进一步得到相应的数据信息。</p>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ol>
-<li>广泛性</li>
-<li>隐蔽性</li>
-<li>危害大</li>
-<li>操作方便</li>
+<h4 id="无验证"><a href="#无验证" class="headerlink" title="无验证"></a>无验证</h4><p>编写一句话木马并上传<br><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC.png?versionId=CAEQDhiBgIDlw6TgxhciIDZkODI4ZmVkNzJhYjQxMjBiN2JkYjIzODM3OTc0OWE0"></p>
+<p>获取相对路径</p>
+<p>upload/shell.php</p>
+<p>打开中国蚁剑上传</p>
+<p>右键–&gt;添加数据–&gt;网址+相对路径–&gt;打开flag.php</p>
+<p>获取flag</p>
+<h4 id="前端验证"><a href="#前端验证" class="headerlink" title="前端验证"></a>前端验证</h4><p>右键查看源码，发现该网站只支持”jpg”、”png”、”gif”,所以将一句话木马后缀名添加”.jpg”上传</p>
+<p>burp suite抓包–&gt;将一句话木马后缀名恢复成”.php”，放包</p>
+<p>上蚁剑。</p>
+<h4 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess</h4><h5 id="htaccess是什么？"><a href="#htaccess是什么？" class="headerlink" title=".htaccess是什么？"></a>.htaccess是什么？</h5><p> .htaccess叫分布式配置文件，全称是Hypertext Access(超文本入口),它提供了针对目录改变配置的方法——在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。并且子目录中的指令会覆盖更高级目录或者主服务器配置文件中的指令。</p>
+<p>作为用户，所能使用的命令受到限制。管理员可以通过Apache的AllowOverride指令来设置。.htaccess文件是用于apache服务器下的控制文件访问的配置文件，因此Nginx下是不会生效的。.htaccess可以帮我们实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许/阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档、文件的跳转等功能。</p>
+<h5 id="htaccess-文件上传漏洞原理："><a href="#htaccess-文件上传漏洞原理：" class="headerlink" title=".htaccess 文件上传漏洞原理："></a>.htaccess 文件上传漏洞原理：</h5><p>一般.htaccess可以用来留后门和针对黑名单绕过</p>
+<p>创建一个txt写入：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">AddType application&#x2F;x-httpd-php .jpg</span><br></pre></td></tr></table></figure>
+
+<p>把”jpg”文件当作”php”文件解析</p>
+<p>重命名为”.htaccess”</p>
+<p>另一种做法：封装：<br>&lt;FilesMatch “1”&gt;<br>SetHandler application/x-httpd-php<br><br>此方法将名为”1”的文件解析为”php”</p>
+<h5 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h5><p>上传”.htaccess”文件，提交</p>
+<p>目的是替换原有的”.htaccess”文件</p>
+<p>上传”一句话木马.jpg”，提交</p>
+<p>上蚁剑。</p>
+<h4 id="MEMI绕过"><a href="#MEMI绕过" class="headerlink" title="MEMI绕过"></a>MEMI绕过</h4><h5 id="什么是MEMI"><a href="#什么是MEMI" class="headerlink" title="什么是MEMI"></a>什么是MEMI</h5><p>MIME(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。</p>
+<h5 id="MEMI绕过的原理"><a href="#MEMI绕过的原理" class="headerlink" title="MEMI绕过的原理"></a>MEMI绕过的原理</h5><p>部分Web应用系统判定文件类型是通过content-type字段，黑客可以通过抓包，将content-type字段改为常见的图片类型，如image/gif，从而绕过校验。</p>
+<h5 id="常见的MIME类型"><a href="#常见的MIME类型" class="headerlink" title="常见的MIME类型"></a>常见的MIME类型</h5><p>text/plain（纯文本）<br>text/html（HTML文档）<br>text/javascript（js代码）<br>application/xhtml+xml（XHTML文档）<br>image/gif（GIF图像）<br>image/jpeg（JPEG图像）<br>image/png（PNG图像）<br>video/mpeg（MPEG动画）<br>application/octet-stream（二进制数据）<br>application/pdf（PDF文档）</p>
+<h5 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h5><p>上传”一句话木马.php”,Burp Suit抓包</p>
+<p>raw栏，修改Conte-Type: application/octet-stream为</p>
+<p>Conte-Type: image/png</p>
+<p>放包</p>
+<p>上蚁剑。</p>
+<h4 id="文件头检查"><a href="#文件头检查" class="headerlink" title="文件头检查"></a>文件头检查</h4><p>提交”一句话木马.php”文件后报错，返回为只允许”jpeg,jpg,png,gif”类型文件</p>
+<p>上传”一句话木马.php”，Burp Suite抓包；</p>
+<p>修改Content-Type: image/gif</p>
+<p>给一句话木马前添加”gif”文件的文件头，”GIF89a”,放包；</p>
+<p>上蚁剑。</p>
+<h4 id="00截断"><a href="#00截断" class="headerlink" title="00截断"></a>00截断</h4><p>先上个图</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD1.png?versionId=CAEQDhiBgID3vcP3xhciIGVlYmM3NzYzNzgzNjQ1M2Q5ZGI3ZWU0NTAzOTAzMDE4"></p>
+<h5 id="什么是00截断"><a href="#什么是00截断" class="headerlink" title="什么是00截断"></a>什么是00截断</h5><p>00截断的原理，就是利用0x00是字符串的结束标识符，攻击者可以利用手动添加字符串标识符的方式来将后面的内容进行截断，而后面的内容又可以帮助我们绕过检测。</p>
+<p>需要注意的是，0x00截断是16进制的截断，需要修改16进制的数据头，如果使用burp，就要在Hex中对数据进行改写。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">00截断的限制条件是PHP&lt;5.3.29，且GPC关闭，一般在url上</span><br></pre></td></tr></table></figure>
+
+<p>在url中 %00 表示ascll码中的 0 ，而ascii中0作为特殊字符保留，表示字符串结束，所以当url中出现%00时就会认为读取已结束。</p>
+<h5 id="表达方式"><a href="#表达方式" class="headerlink" title="表达方式"></a>表达方式</h5><p>0x00 ， %00 ， /00 </p>
+<h5 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h5><p>上传”一句话木马.php%00.jpg”时，后台读取到”一句话木马.php”就停止了。</p>
+<h5 id="解题-2"><a href="#解题-2" class="headerlink" title="解题"></a>解题</h5><p>上传一句话”1.php”，BP抓包</p>
+<p>修改如下</p>
+<ol>
+<li>Post添加1.php%00</li>
+<li>filename修改为”1.jpg”</li>
 </ol>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>SQL注入攻击是通过操作输入来修改SQL语句，用以达到执行代码对<strong>WEB服务器</strong>进行攻击的方法。简单的说就是在post/getweb表单、输入域名或页面请求的查询字符串中插入SQL命令，最终使web服务器执行恶意命令的过程。</p>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>假设某网站页面显示时URL为<a href="http://www.example.com/?test=123%EF%BC%8C%E6%AD%A4%E6%97%B6URL%E5%AE%9E%E9%99%85%E5%90%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%A0%E9%80%92%E4%BA%86%E5%80%BC%E4%B8%BA123%E7%9A%84%E5%8F%98%E9%87%8Ftest%EF%BC%8C%E8%BF%99%E8%A1%A8%E6%98%8E%E5%BD%93%E5%89%8D%E9%A1%B5%E9%9D%A2%E6%98%AF%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9B%E8%A1%8C%E5%8A%A8%E6%80%81%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%BB%93%E6%9E%9C%E3%80%82%E7%94%B1%E6%AD%A4%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%9C%A8URL%E4%B8%AD%E6%8F%92%E5%85%A5%E6%81%B6%E6%84%8F%E7%9A%84SQL%E8%AF%AD%E5%8F%A5%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%89%A7%E8%A1%8C%E3%80%82%E5%8F%A6%E5%A4%96%EF%BC%8C%E5%9C%A8%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E4%BD%BF%E7%94%A8%E5%8A%A8%E6%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9E%84%E9%80%A0SQL%E8%AF%AD%E5%8F%A5%EF%BC%8C%E7%94%A8%E6%9D%A5%E5%88%9B%E5%BB%BA%E6%89%80%E9%9C%80%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%8C%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%E4%B8%8BSQL%E8%AF%AD%E5%8F%A5%E5%9C%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E8%A2%AB%E5%8A%A8%E6%80%81%E7%9A%84%E6%9E%84%E9%80%A0%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%A0%B9%E6%8D%AE%E4%B8%8D%E5%90%8C%E7%9A%84%E6%9D%A1%E4%BB%B6%E4%BA%A7%E7%94%9F%E4%B8%8D%E5%90%8C%E7%9A%84SQL%E8%AF%AD%E5%8F%A5%EF%BC%8C%E6%AF%94%E5%A6%82%E9%9C%80%E8%A6%81%E6%A0%B9%E6%8D%AE%E4%B8%8D%E5%90%8C%E7%9A%84%E8%A6%81%E6%B1%82%E6%9D%A5%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E5%AD%97%E6%AE%B5%E3%80%82%E8%BF%99%E6%A0%B7%E7%9A%84%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E5%85%B6%E5%AE%9E%E4%B8%BASQL%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%E7%95%99%E4%B8%8B%E4%BA%86%E5%BE%88%E5%A4%9A%E7%9A%84%E5%8F%AF%E4%B9%98%E4%B9%8B%E6%9C%BA%E3%80%82">http://www.example.com?test=123，此时URL实际向服务器传递了值为123的变量test，这表明当前页面是对数据库进行动态查询的结果。由此，我们可以在URL中插入恶意的SQL语句并进行执行。另外，在网站开发过程中，开发人员使用动态字符串构造SQL语句，用来创建所需的应用，这种情况下SQL语句在程序的执行过程中被动态的构造使用，可以根据不同的条件产生不同的SQL语句，比如需要根据不同的要求来查询数据库中的字段。这样的开发过程其实为SQL注入攻击留下了很多的可乘之机。</a></p>
-<h1 id="注入方法"><a href="#注入方法" class="headerlink" title="注入方法"></a>注入方法</h1><h2 id="整数型注入"><a href="#整数型注入" class="headerlink" title="整数型注入"></a>整数型注入</h2><h3 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h3><p>当输入的参数为整型时，如ID、年龄、页码等，如果存在注入漏洞，则可以认为是数字型注入。这种数字型注入最多出现在ASP、PHP等弱类型语言中，弱类型语言会自动推导变量类型，例如，参数id=8，PHP会自动推导变量id的数据类型为int类型，那么id=8 and  1=1，则会推导为string类型，这是弱类型语言的特性。而对于Java、C#这类强类型语言，如果试图把一个字符串转换为int类型，则会抛出异常，无法继续执行。所以，强类型的语言很少存在数字型注入漏洞。 </p>
-<h3 id="判断方式"><a href="#判断方式" class="headerlink" title="判断方式"></a>判断方式</h3><ol>
-<li>url为 **<a href="https://www.wha1e.cn/text?id=1&#39;**%E6%97%B6">https://www.wha1e.cn/text?id=1&#39;**时</a> 有一个多余的“**’**”使查询错误</li>
-<li>url为 <strong><a href="https://www.wha1e.cn/text?id=1">https://www.wha1e.cn/text?id=1</a> and 1 = 1</strong> 时, 没有报错, 除非在代码处做了限制(不允许有and字符串)</li>
-<li>url为 <strong><a href="https://www.wha1e.cn/text?id=1">https://www.wha1e.cn/text?id=1</a> and 1 = 2</strong> 时, 由于1=2不成立, 也会报错</li>
-</ol>
-<h3 id="注入实例"><a href="#注入实例" class="headerlink" title="注入实例"></a>注入实例</h3><p>在浏览器地址栏输入：<code>learn.me/sql/article.php?id=1</code>，这是一个get型接口，发送这个请求相当于调用一个查询语句：</p>
-<p><code>$sql = &quot;SELECT * FROM article WHERE id =&quot;,$id</code><br>正常情况下，应该返回一个id=1的文章信息。那么，如果在浏览器地址栏输入：<code>learn.me/sql/article.php?id=-1 OR 1 =1</code>，这就是一个SQL注入攻击了，可能会返回所有文章的相关信息。为什么会这样呢？</p>
-<p>这是因为，id = -1永远是false，1=1永远是true，所有整个where语句永远是ture，所以where条件相当于没有加where条件，那么查询的结果相当于整张表的内容</p>
-<p><strong>原文链接：</strong><a href="https://blog.csdn.net/github_36032947/article/details/78442189">https://blog.csdn.net/github_36032947/article/details/78442189</a></p>
-<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><p>1.检查是否存在注入</p>
-<p><code>and 1=1 返回正确</code></p>
-<p><code>and 1=2 返回错误</code> </p>
-<p>2.猜字段</p>
-<p><code>order by x</code>(x为数字)</p>
-<p>得出字段数</p>
-<p>3.爆数据库名</p>
-<p><code>?id=1 and 1=2 union select 1,database()</code></p>
-<p>得到数据库名称</p>
-<p>4.爆列表</p>
-<p><code>?id=1 and 1=2 union select 1,group_concat(table_name)from information_schema.tables where table_schema=&#39;sqli&#39;</code>(sqli为数据库名)</p>
-<p>因为感觉没有例题空谈无用，所以先去找相对应的题目了。</p>
-<p>后续更新。。。</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD2.png?versionId=CAEQDhiBgMD2k77.xhciIGRjNThlNDE0Yjc1MDQ4NGFiMzAzNjJkNzRjMzIwMTI1"></p>
+<p>放包</p>
+<p>上蚁剑？</p>
+<p>踩坑预警</p>
+<p><a href="http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/?road=/var/www/html/upload/1.php">http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/?road=/var/www/html/upload/1.php</a></p>
+<p>错误演示</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD4.png?versionId=CAEQDhiBgMCArsz.xhciIGU4ZjRhNzI1OWFkZDQ5MjdhMWRlMTkxOTc2MTZhMjhi"></p>
+<p>将”?road=/var/www/html”删除，直接访问</p>
+<p><a href="http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/upload/1.php">http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/upload/1.php</a></p>
+<p>正确连法</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD3.png?versionId=CAEQDhiBgMDrk77.xhciIDkxOGRjOTJlZjA5NjRkYWNhZThhMTkwMDQ0YmY4YjBk"></p>
+<p>粘贴一段原话</p>
+<p><em><u>“action=?road=var/www/html/upload/“和$des = $_GET[‘road’] . “/“ . rand(10, 99) . date(“YmdHis”) . “.” . $ext;这段代码的意思是将上传的文件放在upload文件夹中，而直接访问?road=var/www/html/upload/会再次调用代码（本来会报错，但@和服务器端都抑制了报错），所以只需要访问/upload/1.php就可以了</u></em></p>
+<p>连接成功，获取flag！</p>
+<h4 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h4><p>打开靶机上传一句话成功后发现并不是我们想要的结果</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E5%8F%8C%E5%86%99%E7%BB%95%E8%BF%871.png?versionId=CAEQDhiBgMC4_IH_xhciIDU0Y2EwNTc2ZjRlZjQ1ZGM5MTQ5MTcyZGVmOTU3ZmQ0"></p>
+<p>根据提示使用双写绕过：</p>
+<p>BP抓包；</p>
+<p>将文件后缀名修改为”pphphp”；</p>
+<p>放包；</p>
+<p>上蚁剑。</p>
+<p>至此文件上传告一段落</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0.png?versionId=CAEQDhiBgIDqj4f_xhciIGIxZWYxZmZhMGY1NjQ0ZWRhOTc5ODUxYTljYjE2NTZk"></p>
 ]]></content>
       <categories>
         <category>web</category>
       </categories>
       <tags>
-        <tag>note</tag>
-        <tag>sql注入</tag>
+        <tag>write up</tag>
+        <tag>文件上传</tag>
       </tags>
   </entry>
   <entry>
@@ -164,148 +203,95 @@
       </tags>
   </entry>
   <entry>
-    <title>ctfhub文件上传</title>
-    <url>/2021/04/15/ctfhub%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0wp/</url>
-    <content><![CDATA[<p>ctfhub web之文件上传</p>
+    <title>First</title>
+    <url>/2021/03/27/first/</url>
+    <content><![CDATA[<p>搭建博客成功！<br> <span id="more"></span><br>  此次搭建博客的历程，由于对命令的不理解导致饶了许多弯路。<br>搭建博客的目的是为了更好的学习，今后也一定要不忘初心，多逛逛大佬的博客，常更新自己的博客。</p>
+<p>最后在此鸣谢电子马同学的大力支持。<br>附上搭建博客教程：<a href="https://zhuanlan.zhihu.com/p/102592286">https://zhuanlan.zhihu.com/p/102592286</a></p>
+]]></content>
+      <categories>
+        <category>dailylife</category>
+      </categories>
+      <tags>
+        <tag>daily</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python学习之路</title>
+    <url>/2021/07/07/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>python真的太重要了！</p>
 <span id="more"></span>
 
-<h4 id="无验证"><a href="#无验证" class="headerlink" title="无验证"></a>无验证</h4><p>编写一句话木马并上传<br><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC.png?versionId=CAEQDhiBgIDlw6TgxhciIDZkODI4ZmVkNzJhYjQxMjBiN2JkYjIzODM3OTc0OWE0"></p>
-<p>获取相对路径</p>
-<p>upload/shell.php</p>
-<p>打开中国蚁剑上传</p>
-<p>右键–&gt;添加数据–&gt;网址+相对路径–&gt;打开flag.php</p>
-<p>获取flag</p>
-<h4 id="前端验证"><a href="#前端验证" class="headerlink" title="前端验证"></a>前端验证</h4><p>右键查看源码，发现该网站只支持”jpg”、”png”、”gif”,所以将一句话木马后缀名添加”.jpg”上传</p>
-<p>burp suite抓包–&gt;将一句话木马后缀名恢复成”.php”，放包</p>
-<p>上蚁剑。</p>
-<h4 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess</h4><h5 id="htaccess是什么？"><a href="#htaccess是什么？" class="headerlink" title=".htaccess是什么？"></a>.htaccess是什么？</h5><p> .htaccess叫分布式配置文件，全称是Hypertext Access(超文本入口),它提供了针对目录改变配置的方法——在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。并且子目录中的指令会覆盖更高级目录或者主服务器配置文件中的指令。</p>
-<p>作为用户，所能使用的命令受到限制。管理员可以通过Apache的AllowOverride指令来设置。.htaccess文件是用于apache服务器下的控制文件访问的配置文件，因此Nginx下是不会生效的。.htaccess可以帮我们实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许/阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档、文件的跳转等功能。</p>
-<h5 id="htaccess-文件上传漏洞原理："><a href="#htaccess-文件上传漏洞原理：" class="headerlink" title=".htaccess 文件上传漏洞原理："></a>.htaccess 文件上传漏洞原理：</h5><p>一般.htaccess可以用来留后门和针对黑名单绕过</p>
-<p>创建一个txt写入：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">AddType application&#x2F;x-httpd-php .jpg</span><br></pre></td></tr></table></figure>
+<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>自从寒假学习了一点点比较浅显的python之后就再没继续下去了，甚至那一点浅显的只都快忘记了。但根据现在趋势来看，python真的越来越重要了。所以赶紧趁着这个不长的暑假学习一下。</p>
+<h1 id="day1"><a href="#day1" class="headerlink" title="day1"></a>day1</h1>]]></content>
+      <categories>
+        <category>语言</category>
+      </categories>
+      <tags>
+        <tag>note</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql注入学习</title>
+    <url>/2021/05/23/sql%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>sql注入学习笔记</p>
+<span id="more"></span>
 
-<p>把”jpg”文件当作”php”文件解析</p>
-<p>重命名为”.htaccess”</p>
-<p>另一种做法：封装：<br>&lt;FilesMatch “1”&gt;<br>SetHandler application/x-httpd-php<br><br>此方法将名为”1”的文件解析为”php”</p>
-<h5 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h5><p>上传”.htaccess”文件，提交</p>
-<p>目的是替换原有的”.htaccess”文件</p>
-<p>上传”一句话木马.jpg”，提交</p>
-<p>上蚁剑。</p>
-<h4 id="MEMI绕过"><a href="#MEMI绕过" class="headerlink" title="MEMI绕过"></a>MEMI绕过</h4><h5 id="什么是MEMI"><a href="#什么是MEMI" class="headerlink" title="什么是MEMI"></a>什么是MEMI</h5><p>MIME(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。</p>
-<h5 id="MEMI绕过的原理"><a href="#MEMI绕过的原理" class="headerlink" title="MEMI绕过的原理"></a>MEMI绕过的原理</h5><p>部分Web应用系统判定文件类型是通过content-type字段，黑客可以通过抓包，将content-type字段改为常见的图片类型，如image/gif，从而绕过校验。</p>
-<h5 id="常见的MIME类型"><a href="#常见的MIME类型" class="headerlink" title="常见的MIME类型"></a>常见的MIME类型</h5><p>text/plain（纯文本）<br>text/html（HTML文档）<br>text/javascript（js代码）<br>application/xhtml+xml（XHTML文档）<br>image/gif（GIF图像）<br>image/jpeg（JPEG图像）<br>image/png（PNG图像）<br>video/mpeg（MPEG动画）<br>application/octet-stream（二进制数据）<br>application/pdf（PDF文档）</p>
-<h5 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h5><p>上传”一句话木马.php”,Burp Suit抓包</p>
-<p>raw栏，修改Conte-Type: application/octet-stream为</p>
-<p>Conte-Type: image/png</p>
-<p>放包</p>
-<p>上蚁剑。</p>
-<h4 id="文件头检查"><a href="#文件头检查" class="headerlink" title="文件头检查"></a>文件头检查</h4><p>提交”一句话木马.php”文件后报错，返回为只允许”jpeg,jpg,png,gif”类型文件</p>
-<p>上传”一句话木马.php”，Burp Suite抓包；</p>
-<p>修改Content-Type: image/gif</p>
-<p>给一句话木马前添加”gif”文件的文件头，”GIF89a”,放包；</p>
-<p>上蚁剑。</p>
-<h4 id="00截断"><a href="#00截断" class="headerlink" title="00截断"></a>00截断</h4><p>先上个图</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD1.png?versionId=CAEQDhiBgID3vcP3xhciIGVlYmM3NzYzNzgzNjQ1M2Q5ZGI3ZWU0NTAzOTAzMDE4"></p>
-<h5 id="什么是00截断"><a href="#什么是00截断" class="headerlink" title="什么是00截断"></a>什么是00截断</h5><p>00截断的原理，就是利用0x00是字符串的结束标识符，攻击者可以利用手动添加字符串标识符的方式来将后面的内容进行截断，而后面的内容又可以帮助我们绕过检测。</p>
-<p>需要注意的是，0x00截断是16进制的截断，需要修改16进制的数据头，如果使用burp，就要在Hex中对数据进行改写。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">00截断的限制条件是PHP&lt;5.3.29，且GPC关闭，一般在url上</span><br></pre></td></tr></table></figure>
-
-<p>在url中 %00 表示ascll码中的 0 ，而ascii中0作为特殊字符保留，表示字符串结束，所以当url中出现%00时就会认为读取已结束。</p>
-<h5 id="表达方式"><a href="#表达方式" class="headerlink" title="表达方式"></a>表达方式</h5><p>0x00 ， %00 ， /00 </p>
-<h5 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h5><p>上传”一句话木马.php%00.jpg”时，后台读取到”一句话木马.php”就停止了。</p>
-<h5 id="解题-2"><a href="#解题-2" class="headerlink" title="解题"></a>解题</h5><p>上传一句话”1.php”，BP抓包</p>
-<p>修改如下</p>
-<ol>
-<li>Post添加1.php%00</li>
-<li>filename修改为”1.jpg”</li>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>笔者从完全不懂sql注入开始学习，在广大的互凉网上寻找资源，所以更多内容为搜集到的内容汇总。上传博客的目的是促进自己学习。如果摘抄至某篇博客的内容会附上链接。</p>
+<h1 id="sql注入是什么"><a href="#sql注入是什么" class="headerlink" title="sql注入是什么"></a>sql注入是什么</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p> SQL注入即是指<strong>web应用程序</strong>对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的<strong>SQL语句</strong>，在管理员不知情的情况下实现非法操作，以此来实现欺骗<strong>数据库服务器</strong>执行非授权的任意查询，从而进一步得到相应的数据信息。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ol>
+<li>广泛性</li>
+<li>隐蔽性</li>
+<li>危害大</li>
+<li>操作方便</li>
 </ol>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD2.png?versionId=CAEQDhiBgMD2k77.xhciIGRjNThlNDE0Yjc1MDQ4NGFiMzAzNjJkNzRjMzIwMTI1"></p>
-<p>放包</p>
-<p>上蚁剑？</p>
-<p>踩坑预警</p>
-<p><a href="http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/?road=/var/www/html/upload/1.php">http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/?road=/var/www/html/upload/1.php</a></p>
-<p>错误演示</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD4.png?versionId=CAEQDhiBgMCArsz.xhciIGU4ZjRhNzI1OWFkZDQ5MjdhMWRlMTkxOTc2MTZhMjhi"></p>
-<p>将”?road=/var/www/html”删除，直接访问</p>
-<p><a href="http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/upload/1.php">http://challenge-e119f2f1e564a7be.sandbox.ctfhub.com:10080/upload/1.php</a></p>
-<p>正确连法</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/00%E6%88%AA%E6%96%AD3.png?versionId=CAEQDhiBgMDrk77.xhciIDkxOGRjOTJlZjA5NjRkYWNhZThhMTkwMDQ0YmY4YjBk"></p>
-<p>粘贴一段原话</p>
-<p><em><u>“action=?road=var/www/html/upload/“和$des = $_GET[‘road’] . “/“ . rand(10, 99) . date(“YmdHis”) . “.” . $ext;这段代码的意思是将上传的文件放在upload文件夹中，而直接访问?road=var/www/html/upload/会再次调用代码（本来会报错，但@和服务器端都抑制了报错），所以只需要访问/upload/1.php就可以了</u></em></p>
-<p>连接成功，获取flag！</p>
-<h4 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h4><p>打开靶机上传一句话成功后发现并不是我们想要的结果</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E5%8F%8C%E5%86%99%E7%BB%95%E8%BF%871.png?versionId=CAEQDhiBgMC4_IH_xhciIDU0Y2EwNTc2ZjRlZjQ1ZGM5MTQ5MTcyZGVmOTU3ZmQ0"></p>
-<p>根据提示使用双写绕过：</p>
-<p>BP抓包；</p>
-<p>将文件后缀名修改为”pphphp”；</p>
-<p>放包；</p>
-<p>上蚁剑。</p>
-<p>至此文件上传告一段落</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0.png?versionId=CAEQDhiBgIDqj4f_xhciIGIxZWYxZmZhMGY1NjQ0ZWRhOTc5ODUxYTljYjE2NTZk"></p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>SQL注入攻击是通过操作输入来修改SQL语句，用以达到执行代码对<strong>WEB服务器</strong>进行攻击的方法。简单的说就是在post/getweb表单、输入域名或页面请求的查询字符串中插入SQL命令，最终使web服务器执行恶意命令的过程。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>假设某网站页面显示时URL为<a href="http://www.example.com/?test=123%EF%BC%8C%E6%AD%A4%E6%97%B6URL%E5%AE%9E%E9%99%85%E5%90%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%A0%E9%80%92%E4%BA%86%E5%80%BC%E4%B8%BA123%E7%9A%84%E5%8F%98%E9%87%8Ftest%EF%BC%8C%E8%BF%99%E8%A1%A8%E6%98%8E%E5%BD%93%E5%89%8D%E9%A1%B5%E9%9D%A2%E6%98%AF%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9B%E8%A1%8C%E5%8A%A8%E6%80%81%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%BB%93%E6%9E%9C%E3%80%82%E7%94%B1%E6%AD%A4%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%9C%A8URL%E4%B8%AD%E6%8F%92%E5%85%A5%E6%81%B6%E6%84%8F%E7%9A%84SQL%E8%AF%AD%E5%8F%A5%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%89%A7%E8%A1%8C%E3%80%82%E5%8F%A6%E5%A4%96%EF%BC%8C%E5%9C%A8%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E4%BD%BF%E7%94%A8%E5%8A%A8%E6%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9E%84%E9%80%A0SQL%E8%AF%AD%E5%8F%A5%EF%BC%8C%E7%94%A8%E6%9D%A5%E5%88%9B%E5%BB%BA%E6%89%80%E9%9C%80%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%8C%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%E4%B8%8BSQL%E8%AF%AD%E5%8F%A5%E5%9C%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E8%A2%AB%E5%8A%A8%E6%80%81%E7%9A%84%E6%9E%84%E9%80%A0%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%A0%B9%E6%8D%AE%E4%B8%8D%E5%90%8C%E7%9A%84%E6%9D%A1%E4%BB%B6%E4%BA%A7%E7%94%9F%E4%B8%8D%E5%90%8C%E7%9A%84SQL%E8%AF%AD%E5%8F%A5%EF%BC%8C%E6%AF%94%E5%A6%82%E9%9C%80%E8%A6%81%E6%A0%B9%E6%8D%AE%E4%B8%8D%E5%90%8C%E7%9A%84%E8%A6%81%E6%B1%82%E6%9D%A5%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E5%AD%97%E6%AE%B5%E3%80%82%E8%BF%99%E6%A0%B7%E7%9A%84%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E5%85%B6%E5%AE%9E%E4%B8%BASQL%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%E7%95%99%E4%B8%8B%E4%BA%86%E5%BE%88%E5%A4%9A%E7%9A%84%E5%8F%AF%E4%B9%98%E4%B9%8B%E6%9C%BA%E3%80%82">http://www.example.com?test=123，此时URL实际向服务器传递了值为123的变量test，这表明当前页面是对数据库进行动态查询的结果。由此，我们可以在URL中插入恶意的SQL语句并进行执行。另外，在网站开发过程中，开发人员使用动态字符串构造SQL语句，用来创建所需的应用，这种情况下SQL语句在程序的执行过程中被动态的构造使用，可以根据不同的条件产生不同的SQL语句，比如需要根据不同的要求来查询数据库中的字段。这样的开发过程其实为SQL注入攻击留下了很多的可乘之机。</a></p>
+<h1 id="注入方法"><a href="#注入方法" class="headerlink" title="注入方法"></a>注入方法</h1><h2 id="整数型注入"><a href="#整数型注入" class="headerlink" title="整数型注入"></a>整数型注入</h2><h3 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h3><p>当输入的参数为整型时，如ID、年龄、页码等，如果存在注入漏洞，则可以认为是数字型注入。这种数字型注入最多出现在ASP、PHP等弱类型语言中，弱类型语言会自动推导变量类型，例如，参数id=8，PHP会自动推导变量id的数据类型为int类型，那么id=8 and  1=1，则会推导为string类型，这是弱类型语言的特性。而对于Java、C#这类强类型语言，如果试图把一个字符串转换为int类型，则会抛出异常，无法继续执行。所以，强类型的语言很少存在数字型注入漏洞。 </p>
+<h3 id="判断方式"><a href="#判断方式" class="headerlink" title="判断方式"></a>判断方式</h3><ol>
+<li>url为 **<a href="https://www.wha1e.cn/text?id=1&#39;**%E6%97%B6">https://www.wha1e.cn/text?id=1&#39;**时</a> 有一个多余的“**’**”使查询错误</li>
+<li>url为 <strong><a href="https://www.wha1e.cn/text?id=1">https://www.wha1e.cn/text?id=1</a> and 1 = 1</strong> 时, 没有报错, 除非在代码处做了限制(不允许有and字符串)</li>
+<li>url为 <strong><a href="https://www.wha1e.cn/text?id=1">https://www.wha1e.cn/text?id=1</a> and 1 = 2</strong> 时, 由于1=2不成立, 也会报错</li>
+</ol>
+<h3 id="注入实例"><a href="#注入实例" class="headerlink" title="注入实例"></a>注入实例</h3><p>在浏览器地址栏输入：<code>learn.me/sql/article.php?id=1</code>，这是一个get型接口，发送这个请求相当于调用一个查询语句：</p>
+<p><code>$sql = &quot;SELECT * FROM article WHERE id =&quot;,$id</code><br>正常情况下，应该返回一个id=1的文章信息。那么，如果在浏览器地址栏输入：<code>learn.me/sql/article.php?id=-1 OR 1 =1</code>，这就是一个SQL注入攻击了，可能会返回所有文章的相关信息。为什么会这样呢？</p>
+<p>这是因为，id = -1永远是false，1=1永远是true，所有整个where语句永远是ture，所以where条件相当于没有加where条件，那么查询的结果相当于整张表的内容</p>
+<p><strong>原文链接：</strong><a href="https://blog.csdn.net/github_36032947/article/details/78442189">https://blog.csdn.net/github_36032947/article/details/78442189</a></p>
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><p>1.检查是否存在注入</p>
+<p><code>and 1=1 返回正确</code></p>
+<p><code>and 1=2 返回错误</code> </p>
+<p>2.猜字段</p>
+<p><code>order by x</code>(x为数字)</p>
+<p>得出字段数</p>
+<p>3.爆数据库名</p>
+<p><code>?id=1 and 1=2 union select 1,database()</code></p>
+<p>得到数据库名称</p>
+<p>4.爆列表</p>
+<p><code>?id=1 and 1=2 union select 1,group_concat(table_name)from information_schema.tables where table_schema=&#39;sqli&#39;</code>(sqli为数据库名)</p>
+<p>因为感觉没有例题空谈无用，所以先去找相对应的题目了。</p>
+<p>后续更新。。。</p>
 ]]></content>
       <categories>
         <category>web</category>
       </categories>
       <tags>
-        <tag>write up</tag>
-        <tag>文件上传</tag>
+        <tag>note</tag>
+        <tag>sql注入</tag>
       </tags>
   </entry>
   <entry>
-    <title>蓝帽杯</title>
-    <url>/2021/04/22/%E8%93%9D%E5%B8%BD%E6%9D%AF/</url>
-    <content><![CDATA[<p>ctf 不是全部，只是学习安全的一种的方式！</p>
+    <title>关于我和kali的安装之路</title>
+    <url>/2021/07/03/%E4%B8%80%E4%B8%AA%E8%B8%A9%E4%BA%86%E5%A4%A7%E5%8D%8A%E5%B9%B4%E7%9A%84%E5%9D%91/</url>
+    <content><![CDATA[<p>一时重装一时爽，一直重装一直爽</p>
 <span id="more"></span>
-<h5 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h5><p>在此之前把蓝帽杯看的太重了，以至于没有分配到厉害的师兄难过了一段时间，但最终还是以戏剧收场。等待结果ing</p>
-<h5 id="web滑雪大冒险"><a href="#web滑雪大冒险" class="headerlink" title="web滑雪大冒险"></a>web滑雪大冒险</h5><p>一句话，就是玩</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E6%BB%91%E9%9B%AA%E5%A4%A7%E5%86%92%E9%99%A9.png?versionId=CAEQFRiBgMCKoerTyxciIDU3YjA0OWQ0N2U3NTQxOWRiNjNlYjBmMGI3NzE1N2U5"></p>
-<h4 id="misc冬奥会-is-coming"><a href="#misc冬奥会-is-coming" class="headerlink" title="misc冬奥会_is_coming"></a>misc冬奥会_is_coming</h4><p>打开图片，从文件大小猜测有隐藏文件，打开Kali使用binwalk 分离，获得rar文件，解压获得encode.mp3</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A1.png?versionId=CAEQFRiBgMC3k.rTyxciIDA0MzRhYTU5Y2RiMDQ0ODFiOTkyYmY5OGY1NTA4ZDg3"></p>
-<p>先用winhex查看发现文件尾部有cipher</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A10.png?versionId=CAEQFRiBgMDxk.rTyxciIGVmZDE3MGZiZWQ2YTQ0Njc4OTI0ZmY2MzcxMmQ4MWVj"></p>
-<p>打开kali 使用cat命令获得密文</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A11.png?versionId=CAEQFRiBgMCElOrTyxciIDI3OWFhZDg4MGU5ZjQwZjBhZjA0ZTRiNTg2ODE4YmIy"></p>
-<p>为emoji加密，通过查找猜测为emoji-aes加密，但是找不出密钥，所以继续分析MP3文件</p>
-<p>MP3文件，联想encode编码猜测为mp3stego隐写，联想冬奥会举办时间，2022年2月4日，猜测密码为20220204，获取文件encode.mp3.txt</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A2.png?versionId=CAEQFRiBgMDzl.rTyxciIDQ4NmViZDMzMjM2NDQ5MjNiZDc5NDJiODEzZjNmOGE5"></p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A3.png?versionId=CAEQFRiBgMCKlurTyxciIGUzZmQ4NWIzZTVkNDRkYjc5ODQwNDJkZDA5Y2JiOWEx"></p>
-<p>先替换\x，将编码进行16进制解码，获得一串符号密文</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A7.png?versionId=CAEQFRiBgMD0murTyxciIGZlYmM5ODcwN2M5MzRmZjA5YTVkNWEyY2VhM2ViOGI5"></p>
-<p>查找知道这是wingding加密，通过在线工具解码</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A8.png?versionId=CAEQFRiBgMCrpurTyxciIDhmY2ZhZjgxNjI0NDQzNjJiNWMzNzg0NWYyZjIxNzE2"></p>
-<p>GitHub搜索1cePeak储存库</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A5.png?versionId=CAEQFRiBgMDUmOrTyxciIGVmNzViYThmZDFjYjQ2N2RhNGJmNjM4ZDY0YWViN2Ji"></p>
-<p>本以为直接下载即可获得key，没成想结果如下</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A4.png?versionId=CAEQFRiBgMCNmOrTyxciIDMxNzNjOTU1ZWExMTQ2OWM4MmRiZDg4MDgyZDFhNGNi"></p>
-<p>最后进入post-checkout界面下载获得key</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A6.png?versionId=CAEQFRiBgICimerTyxciIDY0MmMzZmQ2ODNjYjRmNDM4ODEwODE4YWNkYzM2NDlh"></p>
-<p>获得key</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A9.png?versionId=CAEQFRiBgIClnOrTyxciIDliZDJiNGFiODVkYTQ5MzdhZTAwZTQ5ZDgyZjdhNzZj">)</p>
-<p>How_6ad_c0uld_a_1cePeak_be?</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A12.png?versionId=CAEQFRiBgMCNlerTyxciIDczYjdiMmU1ZTgzNDQyODFhY2YxYWI5M2QyYzQ1YmQ5"></p>
-<p>综上，获取flag</p>
-<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A13.png?versionId=CAEQFRiBgMDGlurTyxciIDY3MjUyM2ViZTVhNTQxMDNiOGUzOTVjYzYyNTFmNDk2"></p>
-<h5 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h5><p>三解，排名82。审核能已过，期待参加第一场线下赛。</p>
+<p>自去年安装好了第一个Linux系统之后就一直有一个困扰我许久的问题–联网。<br>我的第一个Linux系统是Ubuntu，安装简单。但是相较于Ubuntu，我更喜欢专业的kali;因为教程问题，导致安装kali失败N多次，最后在排除法以及仔细阅读了安装时系统提出的问题之后，现在已经可以熟练安装了。<br>迎接安装成功的下一个问题就是断网卡。<br>kali安装时默认net连接自动联网，但是在我有一段时间不使用kali之后，再次开机它就断网卡了。无论我实验网上可以搜集到的各种方法，都无效。于是乎就只有一个办法，重装系统。<br>前几天我的常用kali又又又崩了，出于对内部工具的不舍，不甘心又一次重装，就找了一下PMR帮我用向日葵远端操作一下。结果还是以失败告终。<br>最终问了一下N神，他告诉我这应该是电脑自身的问题，不可以使用VMware挂起，如果要恢复的话就只能使用快照恢复。所以为了避免这种问题，以后我要常备份，不后台挂起。</p>
 ]]></content>
       <categories>
-        <category>competition</category>
+        <category>operating system</category>
       </categories>
       <tags>
-        <tag>write up</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2021CISCN国赛</title>
-    <url>/2021/05/16/2021CISCN%E5%9B%BD%E8%B5%9B/</url>
-    <content><![CDATA[<p>360高考</p>
-<span id="more"></span>
-<p>因为写好的blog居然没保存，且太多题目无法复现，所以先放在一边，回头再写。</p>
-]]></content>
-      <categories>
-        <category>competition</category>
-      </categories>
-      <tags>
-        <tag>write up</tag>
+        <tag>linux</tag>
+        <tag>kali</tag>
       </tags>
   </entry>
   <entry>
@@ -361,16 +347,46 @@
       </tags>
   </entry>
   <entry>
-    <title>First</title>
-    <url>/2021/03/27/first/</url>
-    <content><![CDATA[<p>搭建博客成功！<br> <span id="more"></span><br>  此次搭建博客的历程，由于对命令的不理解导致饶了许多弯路。<br>搭建博客的目的是为了更好的学习，今后也一定要不忘初心，多逛逛大佬的博客，常更新自己的博客。</p>
-<p>最后在此鸣谢电子马同学的大力支持。<br>附上搭建博客教程：<a href="https://zhuanlan.zhihu.com/p/102592286">https://zhuanlan.zhihu.com/p/102592286</a></p>
+    <title>蓝帽杯</title>
+    <url>/2021/04/22/%E8%93%9D%E5%B8%BD%E6%9D%AF/</url>
+    <content><![CDATA[<p>ctf 不是全部，只是学习安全的一种的方式！</p>
+<span id="more"></span>
+<h5 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h5><p>在此之前把蓝帽杯看的太重了，以至于没有分配到厉害的师兄难过了一段时间，但最终还是以戏剧收场。等待结果ing</p>
+<h5 id="web滑雪大冒险"><a href="#web滑雪大冒险" class="headerlink" title="web滑雪大冒险"></a>web滑雪大冒险</h5><p>一句话，就是玩</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E6%BB%91%E9%9B%AA%E5%A4%A7%E5%86%92%E9%99%A9.png?versionId=CAEQFRiBgMCKoerTyxciIDU3YjA0OWQ0N2U3NTQxOWRiNjNlYjBmMGI3NzE1N2U5"></p>
+<h4 id="misc冬奥会-is-coming"><a href="#misc冬奥会-is-coming" class="headerlink" title="misc冬奥会_is_coming"></a>misc冬奥会_is_coming</h4><p>打开图片，从文件大小猜测有隐藏文件，打开Kali使用binwalk 分离，获得rar文件，解压获得encode.mp3</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A1.png?versionId=CAEQFRiBgMC3k.rTyxciIDA0MzRhYTU5Y2RiMDQ0ODFiOTkyYmY5OGY1NTA4ZDg3"></p>
+<p>先用winhex查看发现文件尾部有cipher</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A10.png?versionId=CAEQFRiBgMDxk.rTyxciIGVmZDE3MGZiZWQ2YTQ0Njc4OTI0ZmY2MzcxMmQ4MWVj"></p>
+<p>打开kali 使用cat命令获得密文</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A11.png?versionId=CAEQFRiBgMCElOrTyxciIDI3OWFhZDg4MGU5ZjQwZjBhZjA0ZTRiNTg2ODE4YmIy"></p>
+<p>为emoji加密，通过查找猜测为emoji-aes加密，但是找不出密钥，所以继续分析MP3文件</p>
+<p>MP3文件，联想encode编码猜测为mp3stego隐写，联想冬奥会举办时间，2022年2月4日，猜测密码为20220204，获取文件encode.mp3.txt</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A2.png?versionId=CAEQFRiBgMDzl.rTyxciIDQ4NmViZDMzMjM2NDQ5MjNiZDc5NDJiODEzZjNmOGE5"></p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A3.png?versionId=CAEQFRiBgMCKlurTyxciIGUzZmQ4NWIzZTVkNDRkYjc5ODQwNDJkZDA5Y2JiOWEx"></p>
+<p>先替换\x，将编码进行16进制解码，获得一串符号密文</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A7.png?versionId=CAEQFRiBgMD0murTyxciIGZlYmM5ODcwN2M5MzRmZjA5YTVkNWEyY2VhM2ViOGI5"></p>
+<p>查找知道这是wingding加密，通过在线工具解码</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A8.png?versionId=CAEQFRiBgMCrpurTyxciIDhmY2ZhZjgxNjI0NDQzNjJiNWMzNzg0NWYyZjIxNzE2"></p>
+<p>GitHub搜索1cePeak储存库</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A5.png?versionId=CAEQFRiBgMDUmOrTyxciIGVmNzViYThmZDFjYjQ2N2RhNGJmNjM4ZDY0YWViN2Ji"></p>
+<p>本以为直接下载即可获得key，没成想结果如下</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A4.png?versionId=CAEQFRiBgMCNmOrTyxciIDMxNzNjOTU1ZWExMTQ2OWM4MmRiZDg4MDgyZDFhNGNi"></p>
+<p>最后进入post-checkout界面下载获得key</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A6.png?versionId=CAEQFRiBgICimerTyxciIDY0MmMzZmQ2ODNjYjRmNDM4ODEwODE4YWNkYzM2NDlh"></p>
+<p>获得key</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A9.png?versionId=CAEQFRiBgIClnOrTyxciIDliZDJiNGFiODVkYTQ5MzdhZTAwZTQ5ZDgyZjdhNzZj">)</p>
+<p>How_6ad_c0uld_a_1cePeak_be?</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A12.png?versionId=CAEQFRiBgMCNlerTyxciIDczYjdiMmU1ZTgzNDQyODFhY2YxYWI5M2QyYzQ1YmQ5"></p>
+<p>综上，获取flag</p>
+<p><img src="https://wha1e-bucket.oss-cn-beijing.aliyuncs.com/%E8%93%9D%E5%B8%BD%E6%9D%AF/%E5%86%AC%E5%A5%A5%E4%BC%9A13.png?versionId=CAEQFRiBgMDGlurTyxciIDY3MjUyM2ViZTVhNTQxMDNiOGUzOTVjYzYyNTFmNDk2"></p>
+<h5 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h5><p>三解，排名82。审核能已过，期待参加第一场线下赛。</p>
 ]]></content>
       <categories>
-        <category>dailylife</category>
+        <category>competition</category>
       </categories>
       <tags>
-        <tag>daily</tag>
+        <tag>write up</tag>
       </tags>
   </entry>
 </search>
