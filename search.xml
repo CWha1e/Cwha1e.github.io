@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>kali_misc工具</title>
+    <url>/2021/07/10/kali_misc%E5%B7%A5%E5%85%B7/</url>
+    <content><![CDATA[<p>kali上有太多好用的工具了，这里介绍如何在上面安装misc工具</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>misc</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>kali</tag>
+        <tag>tools</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于我和kali的安装之路</title>
     <url>/2021/07/03/%E4%B8%80%E4%B8%AA%E8%B8%A9%E4%BA%86%E5%A4%A7%E5%8D%8A%E5%B9%B4%E7%9A%84%E5%9D%91/</url>
     <content><![CDATA[<p>一时重装一时爽，一直重装一直爽</p>
@@ -247,8 +262,8 @@
         <category>web</category>
       </categories>
       <tags>
-        <tag>文件上传</tag>
         <tag>write up</tag>
+        <tag>文件上传</tag>
       </tags>
   </entry>
   <entry>
